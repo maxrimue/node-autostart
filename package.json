@@ -1,0 +1,35 @@
+{
+  "name": "node-autostart",
+  "version": "0.1.0",
+  "description": "Enable autostart for your node apps",
+  "main": "lib/index.js",
+  "bin": {
+    "autostart": "cli.js"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "crontab": "1.x.x",
+    "yargs": "^3.19.0"
+  },
+  "devDependencies": {
+    "chai": "2.x.x",
+    "mocha": "2.x.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxrimue/node-autostart.git"
+  },
+  "keywords": [
+    "autostart",
+    "startup",
+    "CLI"
+  ],
+  "author": "Max Rittmüller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maxrimue/node-autostart/issues"
+  },
+  "homepage": "https://github.com/maxrimue/node-autostart#readme"
+}
