@@ -4,6 +4,7 @@ process.env.NODE_ENV = 'test';
 
 var assert = require('assert'),
 		expect = require('chai').expect,
+		os = require('os'),
 		autostart = require('../lib/index.js');
 
 describe('Arguments', function() {
