@@ -5,6 +5,7 @@ process.env.NODE_ENV = 'test';
 var assert = require('assert'),
 		expect = require('chai').expect,
 		os = require('os'),
+		exec = require('child_process').exec,
 		autostart = require('../lib/index.js');
 
 describe('Arguments', function() {
@@ -26,7 +27,7 @@ describe('Arguments', function() {
 	});
 });
 
-describe('Checks', function() {
+describe('isAutostartEnabled()', function() {
 	it('should respond with isEnabled=false and not throw for fake service', function() {
 		autostart.isAutostartEnabled('test', function(isEnabled, error) {
 			expect(isEnabled).to.equal(false);
@@ -35,6 +36,60 @@ describe('Checks', function() {
 			}
 			else if(os.platform() === 'darwin') {
 				expect(error).to.equal(null);
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+		});
+	});
+});
+
+describe('enableAutostart()', function() {
+	it('should be able to create a test service', function() {
+		autostart.enableAutostart('Test', 'echo "test"', process.cwd, function(error) {
+			if(os.platform() === 'darwin') {
+				expect(error).to.equal(null);
+			}
+			else if(os.platform() === 'linux') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+		});
+	});
+});
+
+describe('disableAutostart()', function() {
+	it('should be able to delete the test service', function() {
+		autostart.disableAutostart('Test', function(error) {
+			if(os.platform() === 'darwin') {
+				expect(error).to.equal(null);
+			}
+			else if(os.platform() === 'linux') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+		});
+	});
+	it('should refuse to remove not-existing service', function() {
+		autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
+			if(os.platform() === 'darwin') {
+				expect(error).to.equal('Autostart is not enabled, so you cannot disable it ¯\\_(ツ)_/¯');
+			}
+			else if(os.platform() === 'linux') {
+				expect(error).to.equal('Your platform currently is not supported');
 			}
 			else if(os.platform() === 'win32') {
 				expect(error).to.equal('Your platform currently is not supported');
