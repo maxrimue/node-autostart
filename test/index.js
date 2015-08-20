@@ -28,12 +28,6 @@ describe('Arguments', function() {
 describe('Checks', function() {
 	it('should respond with isEnabled=false and not throw for fake service', function() {
 		autostart.isAutostartEnabled('test', function(isEnabled, error) {
-	    if (error !== null) {
-	      err = error;
-	      callback(err);
-	      return 1;
-	    }
-
 			expect(isEnabled).to.equal(false);
 			expect(error).to.equal(null);
 		});
