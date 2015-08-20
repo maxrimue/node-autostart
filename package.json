@@ -9,6 +9,9 @@
   "scripts": {
     "test": "mocha"
   },
+  "engines": {
+    "node": ">= 0.10"
+  },
   "dependencies": {
     "crontab": "1.x.x",
     "yargs": "^3.19.0"
