@@ -45,6 +45,22 @@ describe('isAutostartEnabled()', function() {
 			}
 		});
 	});
+	it('should stop if there\'s a syntax error', function() {
+		autostart.isAutostartEnabled('test;', function(isEnabled, error) {
+			if(os.platform() === 'linux') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else if(os.platform() === 'darwin') {
+				expect(error).not.to.equal(null);
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+		});
+	});
 });
 
 describe('enableAutostart()', function() {
@@ -55,6 +71,38 @@ describe('enableAutostart()', function() {
 			}
 			else if(os.platform() === 'linux') {
 				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+		});
+	});
+	it('should refuse to create a service with the name of an already existing one', function() {
+		autostart.enableAutostart('Test', 'echo "test"', process.cwd, function(error) {
+			if(os.platform() === 'darwin') {
+				expect(error).to.equal('Autostart already is enabled');
+			}
+			else if(os.platform() === 'linux') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+		});
+	});
+	it('should stop if there\'s a syntax error', function() {
+		autostart.enableAutostart('test;', 'echo "test"', process.cwd(), function(error) {
+			if(os.platform() === 'linux') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else if(os.platform() === 'darwin') {
+				expect(error).not.to.equal(null);
 			}
 			else if(os.platform() === 'win32') {
 				expect(error).to.equal('Your platform currently is not supported');
@@ -90,6 +138,22 @@ describe('disableAutostart()', function() {
 			}
 			else if(os.platform() === 'linux') {
 				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+		});
+	});
+	it('should stop if there\'s a syntax error', function() {
+		autostart.disableAutostart('test;', function(error) {
+			if(os.platform() === 'linux') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else if(os.platform() === 'darwin') {
+				expect(error).not.to.equal(null);
 			}
 			else if(os.platform() === 'win32') {
 				expect(error).to.equal('Your platform currently is not supported');
