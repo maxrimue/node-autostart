@@ -11,7 +11,12 @@ describe('Arguments', function() {
 
 	it('should not accept arguments with wrong types', function() {
 		expect(autostart.enableAutostart(1, 2, 3, 4)).to.equal(1);
+		expect(autostart.enableAutostart('string', 2, 3, 4)).to.equal(1);
+		expect(autostart.enableAutostart('string', 'string', 3, 4)).to.equal(1);
+		expect(autostart.enableAutostart('string', 'string', 'string', 4)).to.equal(1);
 		expect(autostart.disableAutostart(1, 2)).to.equal(1);
+		expect(autostart.disableAutostart('string', 2)).to.equal(1);
 		expect(autostart.isAutostartEnabled(1, 2)).to.equal(1);
+		expect(autostart.isAutostartEnabled('string', 2)).to.equal(1);
 	});
 });
