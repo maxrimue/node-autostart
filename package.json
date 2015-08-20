@@ -7,7 +7,8 @@
     "autostart": "cli.js"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
   },
   "engines": {
     "node": ">= 0.10"
@@ -18,7 +19,10 @@
   },
   "devDependencies": {
     "chai": "2.x.x",
-    "mocha": "2.x.x"
+    "coveralls": "^2.11.4",
+    "istanbul": "^0.3.18",
+    "mocha": "2.x.x",
+    "mocha-lcov-reporter": "0.0.2"
   },
   "repository": {
     "type": "git",
