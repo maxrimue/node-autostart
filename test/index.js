@@ -29,7 +29,18 @@ describe('Checks', function() {
 	it('should respond with isEnabled=false and not throw for fake service', function() {
 		autostart.isAutostartEnabled('test', function(isEnabled, error) {
 			expect(isEnabled).to.equal(false);
-			expect(error).to.equal(null);
+			if(os.platform() === 'linux') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else if(os.platform() === 'darwin') {
+				expect(error).to.equal(null);
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
 		});
 	});
 });
