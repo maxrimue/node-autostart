@@ -1,3 +1,7 @@
+'use strict()';
+
+process.env.NODE_ENV = 'test';
+
 var assert = require('assert'),
 		expect = require('chai').expect,
 		autostart = require('../lib/index.js');
