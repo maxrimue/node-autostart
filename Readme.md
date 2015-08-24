@@ -16,7 +16,7 @@ This module is currently a work in progress. Once all desired features work, and
 Pull requests are _very_ appreciated!
 
 ## Documentation
-You can use `node-autostart` both programmatically and per CLI. To use it inside you Node.js app, look at the <b>API for Programmatic Use</b>, if you want to use it in the CLI, use `autostart -h` for further information.
+You can use `node-autostart` both programmatically and per CLI. 'Enabling autostart' means to make the OS run a certain command at logon of the user who 'enabled the autostart' via a program. The command could be, for example, `npm start` in a certain directory, or whatever floats your boat. To use it inside your Node.js app, look at the <b>API for Programmatic Use</b>, if you want to use it in the CLI, use `autostart -h` for further information.
 
 ### API for Programmatic Use
 
