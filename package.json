@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "crontab": "1.x.x",
+    "username": "^1.0.0",
     "yargs": "^3.19.0"
   },
   "devDependencies": {
