@@ -2,6 +2,10 @@ os:
   - linux
   - osx
 language: node_js
+before_install:
+  # NVM is not yet supported officially on OS X, manual install:
+  - git clone https://github.com/creationix/nvm.git /tmp/.nvm
+  - source /tmp/.nvm/nvm.sh
 node_js:
   - "0.12"
   - "0.10"
