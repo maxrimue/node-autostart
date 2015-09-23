@@ -8,7 +8,7 @@ node-autostart is a Node.js module that enables your module to activate autostar
 
 **Note: Currently on OS X, once a command has been assigned to a new autostart, it will be started, and if that autostart gets removed, it will be stopped. This is due to standard behaviour of [launchd](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man8/launchd.8.html)!**
 
-This module is currently a work in progress. Once all desired features work, and Linux, OS X and Windows are supported, this module will go live on npm. Following features could be implemented:
+Following features could be implemented:
 
 - `.autostart` file in your `$HOME` folder to keep track of current activated services
 - `doctor`-function to remove old services belonging to paths that were deleted
@@ -20,7 +20,7 @@ You can use `node-autostart` both programmatically and per CLI. 'Enabling autost
 ```
   autostart enable -n "MyAwesomeApp" -p "/home/me/MyAwesomeApp" -c "npm start"
 ```
-to enable, 
+to enable,
 ```
   autostart check -n "MyAwesomeApp"
 ```
@@ -60,7 +60,7 @@ autostart.isAutostartEnabled(key, function (isEnabled, err) {
 })
 ```
 #### Variables
-`key`: Unique identifier for startup items (always required! (Make it unique! (Don't lose it ಠ_ಠ)))
+`key`: Unique identifier for startup items (always required! (Make it unique))
 
 `command`: Command to be executed in the specified path
 
