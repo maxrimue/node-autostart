@@ -38,7 +38,7 @@ describe('isAutostartEnabled()', function() {
 				expect(error).to.equal(null);
 			}
 			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Your platform currently is not supported');
+				expect(error).to.equal(null);
 			}
 			else {
 				expect(error).to.equal('Your platform currently is not supported');
@@ -54,7 +54,7 @@ describe('isAutostartEnabled()', function() {
 				expect(error).not.to.equal(null);
 			}
 			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Your platform currently is not supported');
+				expect(error).not.to.equal(null);
 			}
 			else {
 				expect(error).to.equal('Your platform currently is not supported');
@@ -73,7 +73,7 @@ describe('enableAutostart()', function() {
 				expect(error).to.equal(null);
 			}
 			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Your platform currently is not supported');
+				expect(error).to.equal(null);
 			}
 			else {
 				expect(error).to.equal('Your platform currently is not supported');
@@ -89,7 +89,7 @@ describe('enableAutostart()', function() {
 				expect(error).to.equal('Autostart already is enabled');
 			}
 			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Your platform currently is not supported');
+				expect(error).to.equal('Autostart already is enabled');
 			}
 			else {
 				expect(error).to.equal('Your platform currently is not supported');
@@ -105,7 +105,7 @@ describe('enableAutostart()', function() {
 				expect(error).not.to.equal(null);
 			}
 			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Your platform currently is not supported');
+				expect(error).not.to.equal(null);
 			}
 			else {
 				expect(error).to.equal('Your platform currently is not supported');
@@ -124,7 +124,7 @@ describe('disableAutostart()', function() {
 				expect(error).to.equal(null);
 			}
 			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Your platform currently is not supported');
+				expect(error).to.equal(null);
 			}
 			else {
 				expect(error).to.equal('Your platform currently is not supported');
@@ -140,7 +140,7 @@ describe('disableAutostart()', function() {
 				expect(error).to.equal('Autostart is not enabled, so you cannot disable it');
 			}
 			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Your platform currently is not supported');
+				expect(error).to.equal('Autostart is not enabled, so you cannot disable it');
 			}
 			else {
 				expect(error).to.equal('Your platform currently is not supported');
@@ -156,7 +156,7 @@ describe('disableAutostart()', function() {
 				expect(error).not.to.equal(null);
 			}
 			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Your platform currently is not supported');
+				expect(error).not.to.equal(null);
 			}
 			else {
 				expect(error).to.equal('Your platform currently is not supported');
