@@ -6,8 +6,6 @@ node-autostart is a Node.js module that enables your module to activate autostar
 - [x] OS X
 - [x] Windows
 
-**Note: Currently on OS X, once a command has been assigned to a new autostart, it will be started, and if that autostart gets removed, it will be stopped. This is due to standard behaviour of [launchd](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man8/launchd.8.html)!**
-
 Following features could be implemented:
 
 - `.autostart` file in your `$HOME` folder to keep track of current activated services
