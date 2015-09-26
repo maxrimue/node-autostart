@@ -7,7 +7,18 @@ node-autostart is a Node.js module that enables your module to activate autostar
 - [x] OS X
 - [x] Windows
 
-Following features could be implemented:
+### Install:  
+
+```
+npm install -g node-autostart
+```   
+for use in CLI, and:   
+```
+npm install --save node-autostart
+```   
+as a dependency for your module.
+
+### Following features could be implemented:
 
 - `.autostart` file in your `$HOME` folder to keep track of current activated services
 - `doctor`-function to remove old services belonging to paths that were deleted
