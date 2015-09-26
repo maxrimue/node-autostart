@@ -19,11 +19,11 @@
     "yargs": "^3.19.0"
   },
   "devDependencies": {
-    "chai": "2.x.x",
+    "chai": "3.x.x",
     "coveralls": "^2.11.4",
     "istanbul": "^0.3.18",
     "mocha": "2.x.x",
-    "mocha-lcov-reporter": "0.0.2"
+    "mocha-lcov-reporter": "1.x.x"
   },
   "repository": {
     "type": "git",
