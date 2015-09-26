@@ -1,4 +1,4 @@
-# node-autostart [![Build Status](https://travis-ci.org/maxrimue/node-autostart.svg)](https://travis-ci.org/maxrimue/node-autostart) [![Coverage Status](https://coveralls.io/repos/maxrimue/node-autostart/badge.svg?branch=master&service=github)](https://coveralls.io/github/maxrimue/node-autostart?branch=master)
+# node-autostart [![Build Status](https://travis-ci.org/maxrimue/node-autostart.svg)](https://travis-ci.org/maxrimue/node-autostart) [![Coverage Status](https://coveralls.io/repos/maxrimue/node-autostart/badge.svg?branch=master&service=github)](https://coveralls.io/github/maxrimue/node-autostart?branch=master) [![Dependency Status](https://david-dm.org/maxrimue/node-autostart.svg)](https://david-dm.org/maxrimue/node-autostart) [![devDependency Status](https://david-dm.org/maxrimue/node-autostart/dev-status.svg)](https://david-dm.org/maxrimue/node-autostart#info=devDependencies)
 
 node-autostart is a Node.js module that enables your module to activate autostart easily. You can also use it as a global module to set-up autostart for anything and anywhere via the command line interface (CLI). Currently, it supports:
 
