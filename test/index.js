@@ -163,4 +163,34 @@ describe('disableAutostart()', function() {
 			}
 		});
 	});
+	it('should act differently when the .autostart file already exists', function() {
+		autostart.enableAutostart('test;', 'echo "test"', process.cwd(), function(error) {
+			if(os.platform() === 'linux') {
+				expect(error).not.to.equal(null);
+			}
+			else if(os.platform() === 'darwin') {
+				expect(error).not.to.equal(null);
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).not.to.equal(null);
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+		});
+		autostart.disableAutostart('test;', function(error) {
+			if(os.platform() === 'linux') {
+				expect(error).not.to.equal(null);
+			}
+			else if(os.platform() === 'darwin') {
+				expect(error).not.to.equal(null);
+			}
+			else if(os.platform() === 'win32') {
+				expect(error).not.to.equal(null);
+			}
+			else {
+				expect(error).to.equal('Your platform currently is not supported');
+			}
+		});
+	});
 });
