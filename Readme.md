@@ -20,8 +20,8 @@ as a dependency for your module.
 
 ### Following features could be implemented:
 
-- `.autostart` file in your `$HOME` folder to keep track of current activated services
-- `doctor`-function to remove old services belonging to paths that were deleted
+- [x] `.autostart` file in your `$HOME` folder to keep track of current activated services
+- [ ] `doctor`-function to remove old services belonging to paths that were deleted
 
 Pull requests are _very_ appreciated!
 
