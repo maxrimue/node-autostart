@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-var autostart = require('./lib/index.js'),
+var fs = require('fs'),
+  colors = require('colors'),
+  username = require('username'),
+  autostart = require('./lib/index.js'),
   argv = require('yargs')
   .usage('Usage: $0 <command> [options]')
   .command('enable', 'Enable autostart here with a custom key', function(yargs) {
@@ -72,7 +75,7 @@ var autostart = require('./lib/index.js'),
       .option('n', {
         demand: true,
         alias: 'name',
-        describe: 'Name of the key for identifying startup objecst',
+        describe: 'Name of the key for identifying startup objects',
         type: 'string',
         nargs: 1
       })
@@ -96,6 +99,28 @@ var autostart = require('./lib/index.js'),
         console.log('Autostart is not enabled');
         process.exit(0);
       }
+    });
+  })
+  .command('doctor', 'See all enabled autostart services', function(yargs) {
+    argv = yargs
+      .help('h')
+      .alias('h', 'help')
+      .showHelpOnFail(false, 'Use --help for further information')
+      .argv;
+
+    try {
+      fs.statSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json');
+    } catch (e) {
+      console.error('No .autostart file for the user ' + username.sync() + ' could be found. Aborting.');
+      process.exit(1);
+    }
+
+    var services = JSON.parse(fs.readFileSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json', 'utf-8'));
+
+    console.log('These services are currently active:');
+
+    Object.keys(services).forEach(function(key) {
+      console.log(('"' + key + '":').inverse + (' ' + services[key]).green);
     });
   })
   .demand(1)

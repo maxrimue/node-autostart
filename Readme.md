@@ -21,7 +21,7 @@ as a dependency for your module.
 ### Following features could be implemented:
 
 - [x] `.autostart` file in your `$HOME` folder to keep track of current activated services
-- [ ] `doctor`-function to remove old services belonging to paths that were deleted
+- [x] `doctor`-function to remove old services that got forgotten
 
 Pull requests are _very_ appreciated!
 

@@ -14,6 +14,7 @@
     "node": ">= 0.10"
   },
   "dependencies": {
+    "colors": "^1.1.2",
     "crontab": "1.x.x",
     "username": "1.x.x",
     "yargs": "3.x.x"
