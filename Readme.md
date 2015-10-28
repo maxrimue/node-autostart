@@ -77,13 +77,13 @@ autostart.isAutostartEnabled(key, function (isEnabled, err) {
 `path`: Place in which the command will be executed (Use `process.cwd()` if you just want it to happen in your current working directory)
 #### Functions
 `.enableAutostart`
-Requires `key`, `command` and `path` variables, returns `err` variable (`null` if no errors occurred).
+Requires `key`, `command` and `path` variables, returns `err`.
 
 `.disableAutostart`
-Requires `key` variable, returns `err` variable (`null` if no errors occurred).
+Requires `key` variable, returns `err`.
 
 `.isAutostartEnabled`
-Requires `key` variable, returns `isEnabled` and `err` variables (err is `null` if no errors occurred).
+Requires `key` variable, returns `isEnabled` and `err`.
 
 ### License
 The MIT License (MIT)

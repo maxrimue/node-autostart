@@ -35,7 +35,7 @@ var fs = require('fs'),
       .argv;
 
     autostart.enableAutostart(argv.n, argv.c, argv.p, function(err) {
-      if (err !== null) {
+      if (err) {
         console.error('An error occured while trying to enable autostart, here are the details:');
         console.error(err);
         process.exit(1);
@@ -60,7 +60,7 @@ var fs = require('fs'),
       .argv;
 
     autostart.disableAutostart(argv.n, function(err) {
-      if (err !== null) {
+      if (err) {
         console.error('An error occured while trying to disable autostart, here are the details:');
         console.error(err);
         process.exit(1);
@@ -85,7 +85,7 @@ var fs = require('fs'),
       .argv;
 
     autostart.isAutostartEnabled(argv.n, function(isEnabled, err) {
-      if (err !== null) {
+      if (err) {
         console.error('An error occured while trying to check if autostart is enabled, here are the details:');
         console.error(err);
         process.exit(1);
@@ -111,13 +111,13 @@ var fs = require('fs'),
     try {
       fs.statSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json');
     } catch (e) {
-      console.error('No .autostart file for the user ' + username.sync() + ' could be found. Aborting.');
+      console.error('No .autostart file for the user ' + username.sync() + ' found. Aborting.');
       process.exit(1);
     }
 
     var services = JSON.parse(fs.readFileSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json', 'utf-8'));
 
-    console.log('These services are currently active:');
+    console.log('These services are currently active:\n');
 
     Object.keys(services).forEach(function(key) {
       console.log(('"' + key + '":').inverse + (' ' + services[key]).green);
