@@ -117,7 +117,12 @@ var fs = require('fs'),
 
     var services = JSON.parse(fs.readFileSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json', 'utf-8'));
 
-    console.log('These services are currently active:\n');
+    if(!Object.keys(services).length) {
+      console.log('No services enabled.'.red);
+      process.exit(0);
+    }
+
+    console.log('These services are currently active:');
 
     Object.keys(services).forEach(function(key) {
       console.log(('"' + key + '":').inverse + (' ' + services[key]).green);
