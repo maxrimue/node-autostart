@@ -1,6 +1,6 @@
 {
   "name": "node-autostart",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Enable autostart for your node apps",
   "main": "lib/index.js",
   "bin": {
@@ -29,7 +29,13 @@
   "keywords": [
     "autostart",
     "startup",
-    "CLI"
+    "CLI",
+    "daemon",
+    "launchd",
+    "launchctl",
+    "logon",
+    "cron",
+    "cronjob"
   ],
   "author": "Max Rittmüller",
   "license": "MIT",
