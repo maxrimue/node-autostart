@@ -1,6 +1,6 @@
 {
   "name": "node-autostart",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Enable autostart for your node apps",
   "main": "lib/index.js",
   "bin": {

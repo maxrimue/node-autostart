@@ -10,20 +10,20 @@ var assert = require('assert'),
 
 describe('Arguments', function() {
 	it('should not accept too few arguments', function() {
-		expect(autostart.enableAutostart('someString', 'anotherString', 'stillAString')).to.equal(1);
-		expect(autostart.disableAutostart('someString')).to.equal(1);
-		expect(autostart.isAutostartEnabled('someString')).to.equal(1);
+		expect(autostart.enableAutostart('someString', 'anotherString', 'stillAString')).to.not.equal(null);
+		expect(autostart.disableAutostart('someString')).to.not.equal(null);
+		expect(autostart.isAutostartEnabled('someString')).to.not.equal(null);
 	});
 
 	it('should not accept arguments with wrong types', function() {
-		expect(autostart.enableAutostart(1, 2, 3, 4)).to.equal(1);
-		expect(autostart.enableAutostart('string', 2, 3, 4)).to.equal(1);
-		expect(autostart.enableAutostart('string', 'string', 3, 4)).to.equal(1);
-		expect(autostart.enableAutostart('string', 'string', 'string', 4)).to.equal(1);
-		expect(autostart.disableAutostart(1, 2)).to.equal(1);
-		expect(autostart.disableAutostart('string', 2)).to.equal(1);
-		expect(autostart.isAutostartEnabled(1, 2)).to.equal(1);
-		expect(autostart.isAutostartEnabled('string', 2)).to.equal(1);
+		expect(autostart.enableAutostart(1, 2, 3, 4)).to.not.equal(null);
+		expect(autostart.enableAutostart('string', 2, 3, 4)).to.not.equal(null);
+		expect(autostart.enableAutostart('string', 'string', 3, 4)).to.not.equal(null);
+		expect(autostart.enableAutostart('string', 'string', 'string', 4)).to.not.equal(null);
+		expect(autostart.disableAutostart(1, 2)).to.not.equal(null);
+		expect(autostart.disableAutostart('string', 2)).to.not.equal(null);
+		expect(autostart.isAutostartEnabled(1, 2)).to.not.equal(null);
+		expect(autostart.isAutostartEnabled('string', 2)).to.not.equal(null);
 	});
 });
 
@@ -49,7 +49,7 @@ describe('isAutostartEnabled()', function() {
 
 describe('enableAutostart()', function() {
 	it('should be able to create a test service', function() {
-		autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd, function(error) {
+		autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
 			if(os.platform() === 'darwin') {
 				expect(error).to.equal(null);
 			}
@@ -65,7 +65,7 @@ describe('enableAutostart()', function() {
 		});
 	});
 	it('should refuse to create a service with the name of an already existing one', function() {
-		autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd, function(error) {
+		autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
 			if(os.platform() === 'darwin') {
 				expect(error).to.equal('Autostart already is enabled');
 			}
