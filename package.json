@@ -7,20 +7,24 @@
     "autostart": "cli.js"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha",
+    "coverage-ci": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec && cat ./coverage/coverage.json | ./node_modules/codecov.io/bin/codecov.io.js"
   },
   "engines": {
     "node": ">= 0.10"
   },
   "dependencies": {
-    "colors": "^1.1.2",
+    "codecov.io": "0.x.x",
+    "colors": "1.x.x",
     "crontab": "1.x.x",
     "username": "1.x.x",
     "yargs": "3.x.x"
   },
   "devDependencies": {
     "chai": "3.x.x",
-    "mocha": "2.x.x"
+    "mocha": "2.x.x",
+    "istanbul": "0.x.x"
   },
   "repository": {
     "type": "git",
