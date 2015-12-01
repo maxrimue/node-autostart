@@ -8,14 +8,12 @@
   },
   "scripts": {
     "test": "mocha",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha",
-    "coverage-ci": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec && cat ./coverage/coverage.json | ./node_modules/codecov.io/bin/codecov.io.js"
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "engines": {
     "node": ">= 0.10"
   },
   "dependencies": {
-    "codecov.io": "0.x.x",
     "colors": "1.x.x",
     "crontab": "1.x.x",
     "username": "1.x.x",
@@ -23,8 +21,9 @@
   },
   "devDependencies": {
     "chai": "3.x.x",
-    "mocha": "2.x.x",
-    "istanbul": "0.x.x"
+    "coveralls": "^2.11.4",
+    "istanbul": "0.x.x",
+    "mocha": "2.x.x"
   },
   "repository": {
     "type": "git",
