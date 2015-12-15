@@ -6,7 +6,7 @@ var assert = require('assert'),
 		expect = require('chai').expect,
 		os = require('os'),
 		exec = require('child_process').exec,
-		autostart = require('../lib/index.js');
+		autostart = require('../index.js');
 
 describe('Arguments', function() {
 	it('should not accept too few arguments', function() {

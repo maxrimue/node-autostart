@@ -3,7 +3,7 @@
 var fs = require('fs'),
   colors = require('colors'),
   username = require('username'),
-  autostart = require('./lib/index.js'),
+  autostart = require('./index.js'),
   argv = require('yargs')
   .usage('Usage: $0 <command> [options]')
   .command('enable', 'Enable autostart here with a custom key', function(yargs) {
@@ -84,7 +84,7 @@ var fs = require('fs'),
       .showHelpOnFail(false, 'Use --help for further information')
       .argv;
 
-    autostart.isAutostartEnabled(argv.n, function(isEnabled, err) {
+    autostart.isAutostartEnabled(argv.n, function(err, isEnabled) {
       if (err) {
         console.error('An error occured while trying to check if autostart is enabled, here are the details:');
         console.error(err);

@@ -57,7 +57,7 @@ autostart.disableAutostart(key, function (err) {
   if(err) console.error(err);
 })
 
-autostart.isAutostartEnabled(key, function (isEnabled, err) {
+autostart.isAutostartEnabled(key, function (err, isEnabled) {
   if(err) console.error(err);
 
   if(isEnabled) {
@@ -83,7 +83,7 @@ Requires `key`, `command` and `path`, returns `err`.
 Requires `key`, returns `err`.
 
 `.isAutostartEnabled`
-Requires `key`, returns `isEnabled` and `err`.
+Requires `key`, returns `err` and `isEnabled`.
 
 ### License
 The MIT License (MIT)

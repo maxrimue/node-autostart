@@ -1,17 +1,11 @@
 {
-  "name": "node-autostart",
-  "version": "1.1.3",
-  "description": "Enable autostart for your node apps",
-  "main": "lib/index.js",
+  "URL": "https://www.npmjs.com/package/node-autostart",
+  "author": "Max Rittmüller",
   "bin": {
     "autostart": "cli.js"
   },
-  "scripts": {
-    "test": "mocha",
-    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
-  },
-  "engines": {
-    "node": ">= 0.10"
+  "bugs": {
+    "url": "https://github.com/maxrimue/node-autostart/issues"
   },
   "dependencies": {
     "colors": "1.x.x",
@@ -19,16 +13,17 @@
     "username": "1.x.x",
     "yargs": "3.x.x"
   },
+  "description": "Enable autostart for your node apps",
   "devDependencies": {
     "chai": "3.x.x",
     "coveralls": "^2.11.4",
     "istanbul": "0.x.x",
     "mocha": "2.x.x"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/maxrimue/node-autostart.git"
+  "engines": {
+    "node": ">= 0.10"
   },
+  "homepage": "https://github.com/maxrimue/node-autostart#readme",
   "keywords": [
     "autostart",
     "startup",
@@ -40,10 +35,17 @@
     "cron",
     "cronjob"
   ],
-  "author": "Max Rittmüller",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/maxrimue/node-autostart/issues"
+  "main": "index.js",
+  "name": "node-autostart",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxrimue/node-autostart.git"
   },
-  "homepage": "https://github.com/maxrimue/node-autostart#readme"
+  "scripts": {
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
+    "store-coverage": "istanbul cover test/index.js",
+    "test": "mocha"
+  },
+  "version": "2.0.0"
 }
