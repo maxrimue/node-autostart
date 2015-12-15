@@ -28,121 +28,50 @@ describe('Arguments', function() {
 });
 
 describe('isAutostartEnabled()', function() {
-	it('should respond with isEnabled=false and not throw for fake service', function() {
-		autostart.isAutostartEnabled('SomeNameIHopeNobodyWillEverTake', function(isEnabled, error) {
+	it('should respond with isEnabled=false and not throw for fake service', function(done) {
+		autostart.isAutostartEnabled('SomeNameIHopeNobodyWillEverTake', function(error, isEnabled) {
 			expect(isEnabled).to.equal(false);
-			if(os.platform() === 'linux') {
-				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'darwin') {
-				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'win32') {
-				expect(error).to.equal(null);
-			}
-			else {
-				expect(error).to.equal('Your platform currently is not supported');
-			}
+			expect(error).to.equal(null);
+			done();
 		});
 	});
 });
 
 describe('enableAutostart()', function() {
-	it('should be able to create a test service', function() {
+	it('should be able to create a test service', function(done) {
 		autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
-			if(os.platform() === 'darwin') {
-				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'linux') {
-				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'win32') {
-				expect(error).to.equal(null);
-			}
-			else {
-				expect(error).to.equal('Your platform currently is not supported');
-			}
+			expect(error).to.equal(null);
+			done();
 		});
 	});
-	it('should refuse to create a service with the name of an already existing one', function() {
+	it('should refuse to create a service with the name of an already existing one', function(done) {
 		autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
-			if(os.platform() === 'darwin') {
-				expect(error).to.equal('Autostart already is enabled');
-			}
-			else if(os.platform() === 'linux') {
-				expect(error).to.equal('Autostart already is enabled');
-			}
-			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Autostart already is enabled');
-			}
-			else {
-				expect(error).to.equal('Your platform currently is not supported');
-			}
+			expect(error).to.equal('Autostart already is enabled');
+			done();
 		});
 	});
 });
 
 describe('disableAutostart()', function() {
-	it('should be able to delete the test service', function() {
+	it('should be able to delete the test service', function(done) {
 		autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
-			if(os.platform() === 'darwin') {
-				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'linux') {
-				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'win32') {
-				expect(error).to.equal(null);
-			}
-			else {
-				expect(error).to.equal('Your platform currently is not supported');
-			}
+			expect(error).to.equal(null);
+			done();
 		});
 	});
-	it('should refuse to remove nonexistant service', function() {
+	it('should refuse to remove nonexistant service', function(done) {
 		autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
-			if(os.platform() === 'darwin') {
-				expect(error).to.equal('Autostart is not enabled, so you cannot disable it');
-			}
-			else if(os.platform() === 'linux') {
-				expect(error).to.equal('Autostart is not enabled, so you cannot disable it');
-			}
-			else if(os.platform() === 'win32') {
-				expect(error).to.equal('Autostart is not enabled, so you cannot disable it');
-			}
-			else {
-				expect(error).to.equal('Your platform currently is not supported');
-			}
+			expect(error).to.equal('Autostart is not enabled');
+			done();
 		});
 	});
-	it('should act differently when the .autostart file already exists', function() {
+	it('should act differently when the .autostart file already exists', function(done) {
 		autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
-			if(os.platform() === 'linux') {
+			expect(error).to.equal(null);
+			autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
 				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'darwin') {
-				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'win32') {
-				expect(error).to.equal(null);
-			}
-			else {
-				expect(error).to.equal('Your platform currently is not supported');
-			}
-		});
-		autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
-			if(os.platform() === 'linux') {
-				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'darwin') {
-				expect(error).to.equal(null);
-			}
-			else if(os.platform() === 'win32') {
-				expect(error).to.equal(null);
-			}
-			else {
-				expect(error).to.equal('Your platform currently is not supported');
-			}
+				done();
+			});
 		});
 	});
 });

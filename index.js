@@ -2,7 +2,8 @@
 
 const osName = process.platform;
 
-var autostart = require('./lib/' + osName + '.js');
+var fs = require('fs'),
+autostart = require('./lib/' + osName + '.js');
 
 /**
  * Changes .autostart file in $HOME path
@@ -68,8 +69,14 @@ function enableAutostart(key, command, path, callback) {
     throw new Error('Passed "callback" to enableAutostart() is not a function.');
   }
 
-  autostart.enableAutostart(key, command, path, function(err) {
-    err ? callback(err) : modifyHomeFile(true, key, command, path);
+  autostart.enableAutostart(key, command, path, function(error) {
+    if(error) {
+      callback(error);
+    }
+    else {
+      modifyHomeFile(true, key, command, path);
+      callback(null);
+    }
   });
 }
 
@@ -92,8 +99,14 @@ function disableAutostart(key, callback) {
     throw new Error('Passed "callback" to disableAutostart() is not a function.');
   }
 
-  autostart.disableAutostart(key, function(err) {
-    err ? callback(err) : modifyHomeFile(false, key);
+  autostart.disableAutostart(key, function(error) {
+    if(error) {
+      callback(error);
+    }
+    else {
+      modifyHomeFile(false, key);
+      callback(null);
+    }
   });
 }
 
@@ -116,8 +129,8 @@ function isAutostartEnabled(key, callback) {
     throw new Error('Passed "callback" to disableAutostart() is not a function.');
   }
 
-  autostart.isAutostartEnabled(key, function(err, isEnabled) {
-    callback(err, isEnabled);
+  autostart.isAutostartEnabled(key, function(error, isEnabled) {
+    callback(error, isEnabled);
   });
 }
 
