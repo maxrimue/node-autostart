@@ -5,20 +5,6 @@ const osName = process.platform;
 var autostart = require('./lib/' + osName + '.js');
 
 /**
- * Checks if given callback is a function, and if not, throws error
- * @param {Function} Callback
- * @param {String} Error (if existing)
- */
-function callback(cb, err) {
-  if(typeof(cb) === 'function') {
-    cb(err);
-  }
-  else {
-    return new Error(err);
-  }
-}
-
-/**
  * Changes .autostart file in $HOME path
  * @param {Boolean} Autostart enabled? (If false = disabled)
  * @param {String} Key
@@ -61,29 +47,29 @@ function modifyHomeFile(isEnabled, key, path, command) {
  * @param {Function} callback
  */
 
-function enableAutostart(key, command, path, cb) {
+function enableAutostart(key, command, path, callback) {
   if (!key || !command || !path || !callback) {
-    return callback(cb, 'Not enough arguments passed to enableAutostart().'); // Here, callback() is used to check if a callback is given
+    throw new Error('Not enough arguments passed to enableAutostart()');
   }
 
   else if (typeof(key) !== 'string') {
-    return callback(cb, 'Passed "key" to enableAutostart() is not a string.');
+    throw new Error('Passed "key" to enableAutostart() is not a string.');
   }
 
   else if (typeof(command) !== 'string') {
-    return callback(cb, 'Passed "command" to enableAutostart() is not a string.');
+    throw new Error('Passed "command" to enableAutostart() is not a string.');
   }
 
   else if (typeof(path) !== 'string') {
-    return callback(cb, 'Passed "path" to enableAutostart() is not a string.');
+    throw new Error('Passed "path" to enableAutostart() is not a string.');
   }
 
   else if (typeof(callback) !== 'function') {
-    return callback(cb, 'Passed "callback" to enableAutostart() is not a function.');
+    throw new Error('Passed "callback" to enableAutostart() is not a function.');
   }
 
   autostart.enableAutostart(key, command, path, function(err) {
-    err ? cb(err) : modifyHomeFile(true, key, command, path);
+    err ? callback(err) : modifyHomeFile(true, key, command, path);
   });
 }
 
@@ -93,21 +79,21 @@ function enableAutostart(key, command, path, cb) {
  * @param {Function} callback
  */
 
-function disableAutostart(key, cb) {
+function disableAutostart(key, callback) {
   if (!key || !callback) {
-    return callback(cb, 'Not enough arguments passed to disableAutostart()');
+    throw new Error('Not enough arguments passed to disableAutostart()');
   }
 
   else if (typeof(key) !== 'string') {
-    return callback(cb, 'Passed "key" to disableAutostart() is not a string.');
+    throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
   else if (typeof(callback) !== 'function') {
-    return callback(cb, 'Passed "callback" to disableAutostart() is not a function.');
+    throw new Error('Passed "callback" to disableAutostart() is not a function.');
   }
 
   autostart.disableAutostart(key, function(err) {
-    err ? cb(err) : modifyHomeFile(false, key);
+    err ? callback(err) : modifyHomeFile(false, key);
   });
 }
 
@@ -117,21 +103,21 @@ function disableAutostart(key, cb) {
  * @param {Function} callback
  */
 
-function isAutostartEnabled(key, cb) {
+function isAutostartEnabled(key, callback) {
   if (!key || !callback) {
-    return callback(cb, 'Not enough arguments passed to isAutostartEnabled()');
+    throw new Error('Not enough arguments passed to isAutostartEnabled()');
   }
 
   else if (typeof(key) !== 'string') {
-    return callback(cb, 'Passed "key" to disableAutostart() is not a string.');
+    throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
   else if (typeof(callback) !== 'function') {
-    return callback(cb, 'Passed "callback" to disableAutostart() is not a function.');
+    throw new Error('Passed "callback" to disableAutostart() is not a function.');
   }
 
   autostart.isAutostartEnabled(key, function(err, isEnabled) {
-    cb(err, isEnabled);
+    callback(err, isEnabled);
   });
 }
 
