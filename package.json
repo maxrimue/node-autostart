@@ -44,7 +44,6 @@
   },
   "scripts": {
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
-    "store-coverage": "istanbul cover test/index.js",
     "test": "mocha"
   },
   "version": "2.0.0"
