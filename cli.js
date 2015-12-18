@@ -11,7 +11,7 @@ var fs = require('fs'),
       .option('n', {
         demand: true,
         alias: 'name',
-        describe: 'Name of the key for identifying startup objecst',
+        describe: 'Name of the key for identifying startup objects',
         type: 'string',
         nargs: 1
       })
@@ -103,6 +103,10 @@ var fs = require('fs'),
   })
   .command('doctor', 'See all enabled autostart services', function(yargs) {
     argv = yargs
+      .option('f', {
+        alias: 'find',
+        describe: 'Let node-autostart find broken services (active but nonexistant)'
+      })
       .help('h')
       .alias('h', 'help')
       .showHelpOnFail(false, 'Use --help for further information')
@@ -117,16 +121,34 @@ var fs = require('fs'),
 
     var services = JSON.parse(fs.readFileSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json', 'utf-8'));
 
-    if(!Object.keys(services).length) {
+    if (!Object.keys(services).length) {
       console.log('No services enabled.'.red);
       process.exit(0);
     }
 
     console.log('These services are currently active:');
 
-    Object.keys(services).forEach(function(key) {
-      console.log(('"' + key + '":').inverse + (' ' + services[key]).green);
-    });
+    for(var i in services) {
+      console.log(('"' + i + '":').inverse, ("\n   Path: " + services[i].path).green, ("\n   Command: " + services[i].command).green);
+    }
+
+    if (argv.f) {
+      var brokenServices = [];
+      for (var key in services) {
+        if(services[key].path !== "undefined") {
+          try {
+            fs.statSync(services[key].path);
+          } catch (e) {
+            brokenServices.push(key);
+          }
+        }
+      }
+
+      console.log('\nFollowing services are considered broken: ');
+      for(key = 0; key < brokenServices.length; key++) {
+        console.log(('"' + i + '":').inverse, ("\n   Path: " + services[i].path).red, ("\n   Command: " + services[i].command).green);
+      }
+    }
   })
   .demand(1)
   .help('h')

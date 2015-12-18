@@ -12,7 +12,7 @@ autostart = require('./lib/' + osName + '.js');
  * @param {String} Path
  * @param {String} Command
  */
-function modifyHomeFile(isEnabled, key, path, command) {
+function modifyHomeFile(isEnabled, key, command, path) {
   var fileExists = true, content;
 
   try {
@@ -27,7 +27,10 @@ function modifyHomeFile(isEnabled, key, path, command) {
     } else {
       content = {};
     }
-    content[key] = 'Path: ' + path + ', command: ' + command;
+    content[key] = {
+      'path': path,
+      'command': command
+    };
   } else {
     if (fileExists) {
       content = JSON.parse(fs.readFileSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json', 'utf-8'));
