@@ -91,7 +91,7 @@ var fs = require('fs'),
         process.exit(1);
       }
 
-      console.log("Done!");
+      console.log('Done!');
       if (isEnabled) {
         console.log('Autostart is enabled');
         process.exit(0);
@@ -129,13 +129,13 @@ var fs = require('fs'),
     console.log('These services are currently active:');
 
     for(var i in services) {
-      console.log(('"' + i + '":').inverse, ("\n   Path: " + services[i].path).green, ("\n   Command: " + services[i].command).green);
+      console.log(('"' + i + '":').inverse, ('\n   Path: ' + services[i].path).green, ('\n   Command: ' + services[i].command).green);
     }
 
     if (argv.f) {
       var brokenServices = [];
       for (var key in services) {
-        if(services[key].path !== "undefined") {
+        if(services[key].path !== 'undefined') {
           try {
             fs.statSync(services[key].path);
           } catch (e) {
@@ -146,7 +146,7 @@ var fs = require('fs'),
 
       console.log('\nFollowing services are considered broken: ');
       for(key = 0; key < brokenServices.length; key++) {
-        console.log(('"' + i + '":').inverse, ("\n   Path: " + services[i].path).red, ("\n   Command: " + services[i].command).green);
+        console.log(('"' + i + '":').inverse, ('\n   Path: ' + services[i].path).red, ('\n   Command: ' + services[i].command).green);
       }
     }
   })
