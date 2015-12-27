@@ -6,6 +6,7 @@ var assert = require('assert'),
 		expect = require('chai').expect,
 		os = require('os'),
 		exec = require('child_process').exec,
+		mock = require('mock-fs'),
 		autostart = require('../index.js');
 
 describe('Arguments', function() {
@@ -50,6 +51,14 @@ describe('enableAutostart()', function() {
 			done();
 		});
 	});
+	it('should fail if fs.stats throws an error', function(done) {
+		mock({"/just/some/path":{}});
+		autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
+			expect(error).to.not.equal(null);
+			mock.restore();
+			done();
+		});
+	});
 });
 
 describe('disableAutostart()', function() {
@@ -73,5 +82,13 @@ describe('disableAutostart()', function() {
 				done();
 			});
 		});
+	});
+	it('should fail if fs.stats throws an error', function(done) {
+		mock({"/just/some/path":{}});
+		autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
+			expect(error).to.not.equal(null);
+			done();
+		});
+		mock.restore();
 	});
 });
