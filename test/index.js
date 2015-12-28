@@ -7,7 +7,11 @@ var assert = require('assert'),
 		os = require('os'),
 		exec = require('child_process').exec,
 		mock = require('mock-fs'),
+		pathToJSON = (process.env.HOME || process.env.USERPROFILE) + '/.autostart.json',
 		autostart = require('../index.js');
+
+var mockedFs = {};
+mockedFs[pathToJSON] = {};
 
 describe('Arguments', function() {
 	it('should not accept too few arguments', function() {
@@ -52,7 +56,7 @@ describe('enableAutostart()', function() {
 		});
 	});
 	it('should fail if fs.stats throws an error', function(done) {
-		mock({"/just/some/path":{}});
+		mock(mockedFs);
 		autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
 			expect(error).to.not.equal(null);
 			mock.restore();
@@ -84,9 +88,10 @@ describe('disableAutostart()', function() {
 		});
 	});
 	it('should fail if fs.stats throws an error', function(done) {
-		mock({"/just/some/path":{}});
+		mock(mockedFs);
 		autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
 			expect(error).to.not.equal(null);
+			console.log(error);
 			done();
 		});
 		mock.restore();
