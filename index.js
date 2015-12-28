@@ -16,7 +16,12 @@ function modifyHomeFile(isEnabled, key, command, path) {
   var fileExists = true, content;
 
   try {
-    fs.statSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json');
+    if(process.env.NODE_ENV === 'test' && process.env.FORCENOJSON === 'true') {
+      throw new Error();
+    }
+    else {
+      fs.statSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json');
+    }
   } catch (e) {
     fileExists = false;
   }

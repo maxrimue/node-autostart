@@ -53,7 +53,7 @@ describe('Arguments', function() {
 
 describe('isAutostartEnabled()', function() {
   it('should respond with isEnabled=false and not throw for fake service', function(done) {
-    autostart.isAutostartEnabled('SomeNameIHopeNobodyWillEverTake', function(error, isEnabled) {
+    autostart.isAutostartEnabled('TestService1', function(error, isEnabled) {
       expect(isEnabled).to.equal(false);
       if(error) {
 				expect(error.code).to.equal('ENOENT');
@@ -67,20 +67,20 @@ describe('isAutostartEnabled()', function() {
 
 describe('enableAutostart()', function() {
   it('should be able to create a test service', function(done) {
-    autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
+    autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), function(error) {
       expect(error).to.equal(null);
       done();
     });
   });
   it('should refuse to create a service with the name of an already existing one', function(done) {
-    autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
+    autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), function(error) {
       expect(error).to.equal('Autostart already is enabled');
       done();
     });
   });
   it('should fail if fs.stats/crontab throws an error', function(done) {
 		process.env.FORCEERROR = true;
-    autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
+    autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), function(error) {
       expect(error).to.not.equal(null);
 			process.env.FORCEERROR = false;
       done();
@@ -90,24 +90,15 @@ describe('enableAutostart()', function() {
 
 describe('disableAutostart()', function() {
   it('should be able to delete the test service', function(done) {
-    autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
+    autostart.disableAutostart('TestService1', function(error) {
       expect(error).to.equal(null);
       done();
     });
   });
   it('should refuse to remove nonexistant service', function(done) {
-    autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
+    autostart.disableAutostart('TestService1', function(error) {
       expect(error).to.equal('Autostart is not enabled');
       done();
-    });
-  });
-  it('should act differently when the .autostart file already exists', function(done) {
-    autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
-      expect(error).to.equal(null);
-      autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
-        expect(error).to.equal(null);
-        done();
-      });
     });
   });
   it('should fail if fs.stats/crontab throws an error', function(done) {
@@ -116,6 +107,20 @@ describe('disableAutostart()', function() {
       expect(error).to.not.equal(null);
 			process.env.FORCEERROR = false;
       done();
+    });
+  });
+});
+
+describe('autostart.json', function() {
+  it('should create a new file if no .autostart.json exists', function(done) {
+    process.env.FORCENOJSON = true;
+    autostart.enableAutostart('TestService2', 'echo "test"', process.cwd(), function(error) {
+      expect(error).to.equal(null);
+      autostart.disableAutostart('TestService2', function(error) {
+        expect(error).to.equal(null);
+        process.env.FORCENOJSON = false;
+        done();
+      });
     });
   });
 });
