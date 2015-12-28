@@ -55,7 +55,11 @@ describe('isAutostartEnabled()', function() {
   it('should respond with isEnabled=false and not throw for fake service', function(done) {
     autostart.isAutostartEnabled('SomeNameIHopeNobodyWillEverTake', function(error, isEnabled) {
       expect(isEnabled).to.equal(false);
-      expect(error.code).to.equal('ENOENT');
+      if(error) {
+				expect(error.code).to.equal('ENOENT');
+			} else {
+				expect(error).to.equal(null);
+			}
       done();
     });
   });
