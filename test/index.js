@@ -78,9 +78,11 @@ describe('enableAutostart()', function() {
       done();
     });
   });
-  it('should fail if fs.stats throws an error', function(done) {
+  it('should fail if fs.stats/crontab throws an error', function(done) {
+		process.env.FORCEERROR = true;
     autostart.enableAutostart('SomeNameIHopeNobodyWillEverTake', 'echo "test"', process.cwd(), function(error) {
       expect(error).to.not.equal(null);
+			process.env.FORCEERROR = false;
       done();
     });
   });
@@ -108,9 +110,11 @@ describe('disableAutostart()', function() {
       });
     });
   });
-  it('should fail if fs.stats throws an error', function(done) {
+  it('should fail if fs.stats/crontab throws an error', function(done) {
+		process.env.FORCEERROR = true;
     autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
       expect(error).to.not.equal(null);
+			process.env.FORCEERROR = false;
       done();
     });
   });
