@@ -6,7 +6,6 @@ var assert = require('assert'),
   expect = require('chai').expect,
   os = require('os'),
   exec = require('child_process').exec,
-  mock = require('mock-fs'),
   pathToJSON = (process.env.HOME || process.env.USERPROFILE) + '/.autostart.json',
   autostart = require('../index.js');
 

@@ -10,7 +10,6 @@
   "dependencies": {
     "colors": "1.x.x",
     "crontab": "1.x.x",
-    "mock-fs": "^3.6.0",
     "username": "1.x.x",
     "yargs": "3.x.x"
   },
