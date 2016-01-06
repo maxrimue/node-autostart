@@ -54,11 +54,11 @@ describe('isAutostartEnabled()', function() {
   it('should respond with isEnabled=false and not throw for fake service', function(done) {
     autostart.isAutostartEnabled('TestService1', function(error, isEnabled) {
       expect(isEnabled).to.equal(false);
-      if(error) {
-				expect(error.code).to.equal('ENOENT');
-			} else {
-				expect(error).to.equal(null);
-			}
+      if (error) {
+        expect(error.code).to.equal('ENOENT');
+      } else {
+        expect(error).to.equal(null);
+      }
       done();
     });
   });
@@ -78,10 +78,10 @@ describe('enableAutostart()', function() {
     });
   });
   it('should fail if fs.stats/crontab throws an error', function(done) {
-		process.env.FORCEERROR = true;
+    process.env.FORCEERROR = true;
     autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), function(error) {
       expect(error).to.not.equal(null);
-			process.env.FORCEERROR = false;
+      process.env.FORCEERROR = false;
       done();
     });
   });
@@ -101,10 +101,10 @@ describe('disableAutostart()', function() {
     });
   });
   it('should fail if fs.stats/crontab throws an error', function(done) {
-		process.env.FORCEERROR = true;
+    process.env.FORCEERROR = true;
     autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
       expect(error).to.not.equal(null);
-			process.env.FORCEERROR = false;
+      process.env.FORCEERROR = false;
       done();
     });
   });
