@@ -13,7 +13,7 @@
     "crontab": "1.x.x",
     "file-exists": "^1.0.0",
     "mock-fs": "^3.6.0",
-    "username": "1.x.x",
+    "username": "2.x.x",
     "yargs": "3.x.x"
   },
   "description": "Enable autostart for your node apps",
