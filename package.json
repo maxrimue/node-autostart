@@ -21,7 +21,7 @@
     "babel-register": "^6.4.3",
     "chai": "3.x.x",
     "coveralls": "^2.11.4",
-    "istanbul": "0.x.x",
+    "babel-istanbul": "0.x.x",
     "mocha": "2.x.x"
   },
   "engines": {
@@ -47,8 +47,7 @@
     "url": "git+https://github.com/maxrimue/node-autostart.git"
   },
   "scripts": {
-    "coverage": "npm run build && node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --compilers js:babel-register -- -R spec ./test/*",
-    "test": "npm run build && mocha --compilers js:babel-register",
+    "test": "npm run build && babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
     "build": "babel src -d lib"
   },
   "version": "2.0.1"

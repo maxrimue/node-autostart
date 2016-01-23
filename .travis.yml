@@ -12,7 +12,6 @@ install:
   - node --version
   - npm install
 script: npm test
-after_success: "npm run coverage"
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 env:
   - NODE_VERSION="0.10"
