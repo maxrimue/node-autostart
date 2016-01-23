@@ -1,10 +1,8 @@
-'use strict';
-
 var fs = require('fs'),
-    crontab = require('crontab');
+  crontab = require('crontab');
 
 function enableAutostart(key, command, path, callback) {
-  isAutostartEnabled(key, function (error, isEnabled) {
+  isAutostartEnabled(key, function(error, isEnabled) {
     if (error) {
       callback(error);
       return;
@@ -18,14 +16,14 @@ function enableAutostart(key, command, path, callback) {
     var linuxCommand = 'cd ' + path + ' && ' + command;
     crontab.create(linuxCommand, '@reboot', key);
 
-    crontab.save(function (error) {
+    crontab.save(function(error) {
       callback(error);
     });
   });
 }
 
 function disableAutostart(key, callback) {
-  isAutostartEnabled(key, function (error, isEnabled) {
+  isAutostartEnabled(key, function(error, isEnabled) {
     if (error) {
       callback(error);
       return;
@@ -40,7 +38,7 @@ function disableAutostart(key, callback) {
       comment: key
     });
 
-    crontab.save(function (error) {
+    crontab.save(function(error) {
       callback(error);
     });
   });
@@ -48,7 +46,7 @@ function disableAutostart(key, callback) {
 
 function isAutostartEnabled(key, callback) {
   var tmpLoad = crontab.load; //Variable for temporarily saving crontab.load() as crontab.load() overwrites 'crontab'
-  crontab.load(function (error, crontabData) {
+  crontab.load(function(error, crontabData) {
     crontab = crontabData; //Make crontab's data globally available
     crontab.load = tmpLoad;
 
@@ -62,8 +60,8 @@ function isAutostartEnabled(key, callback) {
     }
 
     if (crontab.jobs({
-      comment: key
-    }).length == '0') {
+        comment: key
+      }).length == '0') {
       callback(null, false);
     } else {
       callback(null, true);

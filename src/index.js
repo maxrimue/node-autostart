@@ -3,7 +3,7 @@
 const osName = process.platform;
 
 var fs = require('fs'),
-autostart = require('./lib/' + osName + '.js');
+autostart = require('./' + osName + '.js');
 
 /**
  * Changes .autostart file in $HOME path
@@ -57,7 +57,7 @@ function modifyHomeFile(isEnabled, key, command, path) {
  */
 
 function enableAutostart(key, command, path, callback) {
-  if (!key || !command || !path || !callback) {
+  if (arguments.length !== 4) {
     throw new Error('Not enough arguments passed to enableAutostart()');
   }
 
@@ -95,7 +95,7 @@ function enableAutostart(key, command, path, callback) {
  */
 
 function disableAutostart(key, callback) {
-  if (!key || !callback) {
+  if (arguments.length !== 2) {
     throw new Error('Not enough arguments passed to disableAutostart()');
   }
 
@@ -125,7 +125,7 @@ function disableAutostart(key, callback) {
  */
 
 function isAutostartEnabled(key, callback) {
-  if (!key || !callback) {
+  if (arguments.length !== 2) {
     throw new Error('Not enough arguments passed to isAutostartEnabled()');
   }
 

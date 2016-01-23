@@ -1,8 +1,6 @@
-'use strict';
-
 var fs = require('fs'),
-    os = require('os'),
-    username = require('username');
+  os = require('os'),
+  username = require('username');
 
 /**
  * Returns the path for the startup folder in Windows
@@ -19,7 +17,7 @@ function getWinStartupPath() {
 }
 
 function enableAutostart(key, path, command, callback) {
-  isAutostartEnabled(key, function (error, isEnabled) {
+  isAutostartEnabled(key, function(error, isEnabled) {
     if (error) {
       if (error.code !== 'ENOENT') {
         callback(error);
@@ -33,14 +31,14 @@ function enableAutostart(key, path, command, callback) {
     }
 
     var batchFileContent = 'cd ' + path + ' && ' + command;
-    fs.writeFile(getWinStartupPath() + '/' + key + '.bat', batchFileContent, function (error) {
+    fs.writeFile(getWinStartupPath() + '/' + key + '.bat', batchFileContent, function(error) {
       callback(error);
     });
   });
 }
 
 function disableAutostart(key, callback) {
-  isAutostartEnabled(key, function (error, isEnabled) {
+  isAutostartEnabled(key, function(error, isEnabled) {
     if (error) {
       if (error.code !== 'ENOENT') {
         callback(error);
@@ -53,14 +51,14 @@ function disableAutostart(key, callback) {
       return;
     }
 
-    fs.unlink(getWinStartupPath() + '/' + key + '.bat', function (error) {
+    fs.unlink(getWinStartupPath() + '/' + key + '.bat', function(error) {
       callback(error);
     });
   });
 }
 
 function isAutostartEnabled(key, callback) {
-  fs.stat(getWinStartupPath() + '/' + key + '.bat', function (error, stats) {
+  fs.stat(getWinStartupPath() + '/' + key + '.bat', function(error, stats) {
     if (process.env.NODE_ENV === 'test' && process.env.FORCEERROR === true) {
       error = new Error('Test error');
     }

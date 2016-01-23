@@ -2,7 +2,7 @@
   "URL": "https://www.npmjs.com/package/node-autostart",
   "author": "Max Rittmüller",
   "bin": {
-    "autostart": "cli.js"
+    "autostart": "lib/cli.js"
   },
   "bugs": {
     "url": "https://github.com/maxrimue/node-autostart/issues"
@@ -10,11 +10,15 @@
   "dependencies": {
     "colors": "1.x.x",
     "crontab": "1.x.x",
+    "mock-fs": "^3.6.0",
     "username": "1.x.x",
     "yargs": "3.x.x"
   },
   "description": "Enable autostart for your node apps",
   "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.4.3",
     "chai": "3.x.x",
     "coveralls": "^2.11.4",
     "istanbul": "0.x.x",
@@ -36,15 +40,16 @@
     "cronjob"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/index.js",
   "name": "node-autostart",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maxrimue/node-autostart.git"
   },
   "scripts": {
-    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
-    "test": "mocha"
+    "coverage": "npm run build && node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --compilers js:babel-register -- -R spec ./test/*",
+    "test": "npm run build && mocha --compilers js:babel-register",
+    "build": "babel src -d lib"
   },
   "version": "2.0.1"
 }

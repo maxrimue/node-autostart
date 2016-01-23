@@ -7,7 +7,7 @@ var assert = require('assert'),
   os = require('os'),
   exec = require('child_process').exec,
   pathToJSON = (process.env.HOME || process.env.USERPROFILE) + '/.autostart.json',
-  autostart = require('../index.js');
+  autostart = require('../lib/index.js');
 
 describe('Arguments', function() {
   it('should not accept too few arguments', function() {
