@@ -46,7 +46,8 @@
     "url": "git+https://github.com/maxrimue/node-autostart.git"
   },
   "scripts": {
-    "test": "npm run build && babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
+    "coverage": "npm run build && babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
+    "test": "npm run build && babel-node ./node_modules/mocha/bin/_mocha",
     "build": "babel src -d lib"
   },
   "version": "2.0.1"
