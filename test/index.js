@@ -87,17 +87,3 @@ describe('disableAutostart()', function() {
     });
   });
 });
-
-describe('autostart.json', function() {
-  it('should create a new file if no .autostart.json exists', function(done) {
-    process.env.FORCENOJSON = true;
-    autostart.enableAutostart('TestService2', 'echo "test"', process.cwd(), function(error) {
-      expect(error).to.equal(null);
-      autostart.disableAutostart('TestService2', function(error) {
-        expect(error).to.equal(null);
-        process.env.FORCENOJSON = false;
-        done();
-      });
-    });
-  });
-});
