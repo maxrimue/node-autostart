@@ -1,15 +1,11 @@
+require("babel-polyfill");
+
 var fs = require('fs'),
-  username = require('username');
+  username = require('username'),
+  fileExists = require('file-exists');
 
 function enableAutostart(key, command, path, callback) {
   isAutostartEnabled(key, function(error, isEnabled) {
-    if (error) {
-      if (error.code !== 'ENOENT') {
-        callback(error);
-        return;
-      }
-    }
-
     if (isEnabled) {
       callback('Autostart already is enabled');
       return;
@@ -30,11 +26,9 @@ function enableAutostart(key, command, path, callback) {
 
 function disableAutostart(key, callback) {
   isAutostartEnabled(key, function(error, isEnabled) {
-    if (error) {
-      if (error.code !== 'ENOENT') {
-        callback(error);
-        return;
-      }
+    if(error) {
+      callback(error);
+      return;
     }
 
     if (!isEnabled) {
@@ -50,20 +44,15 @@ function disableAutostart(key, callback) {
 }
 
 function isAutostartEnabled(key, callback) {
-  fs.stat('/Users/' + username.sync() + '/Library/LaunchAgents/' + key + '.plist', function(error, stat) {
+  var err;
 
-    if (process.env.NODE_ENV == 'test' && process.env.FORCEERROR === 'true') {
-      error = new Error('Test error');
-    }
+  if(process.env.FORCEERROR === 'true') {
+    err = new Error('Test error');
+  } else {
+    err = null;
+  }
 
-    if (!error && stat.isFile()) {
-      callback(null, true);
-    } else {
-      callback(error, false);
-    }
-
-    return;
-  });
+  callback(err, fileExists('/Users/' + username.sync() + '/Library/LaunchAgents/' + key + '.plist'));
 }
 
 module.exports = {

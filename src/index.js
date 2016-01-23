@@ -1,5 +1,7 @@
 'use strict()';
 
+require("babel-polyfill");
+
 const osName = process.platform;
 
 var fs = require('fs'),
@@ -14,7 +16,7 @@ autostart = require('./' + osName + '.js');
  */
 
 function enableAutostart(key, command, path, callback) {
-  if (arguments.length !== 4) {
+  if (arguments.length < 3) {
     throw new Error('Not enough arguments passed to enableAutostart()');
   }
 
@@ -30,17 +32,15 @@ function enableAutostart(key, command, path, callback) {
     throw new Error('Passed "path" to enableAutostart() is not a string.');
   }
 
-  else if (typeof(callback) !== 'function') {
-    throw new Error('Passed "callback" to enableAutostart() is not a function.');
-  }
-
-  autostart.enableAutostart(key, command, path, function(error) {
-    if(error) {
-      callback(error);
-    }
-    else {
-      callback(null);
-    }
+  return new Promise((resolve, reject) => {
+    autostart.enableAutostart(key, command, path, function(error) {
+      if(typeof callback === 'function') {
+        callback(error);
+      } else {
+        if(!error) resolve();
+        else reject(error);
+      }
+    });
   });
 }
 
@@ -51,7 +51,7 @@ function enableAutostart(key, command, path, callback) {
  */
 
 function disableAutostart(key, callback) {
-  if (arguments.length !== 2) {
+  if (arguments.length < 1) {
     throw new Error('Not enough arguments passed to disableAutostart()');
   }
 
@@ -59,17 +59,15 @@ function disableAutostart(key, callback) {
     throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
-  else if (typeof(callback) !== 'function') {
-    throw new Error('Passed "callback" to disableAutostart() is not a function.');
-  }
-
-  autostart.disableAutostart(key, function(error) {
-    if(error) {
-      callback(error);
-    }
-    else {
-      callback(null);
-    }
+  return new Promise((resolve, reject) => {
+    autostart.disableAutostart(key, function(error) {
+      if(typeof callback === 'function') {
+        callback(error);
+      } else {
+        if(!error) resolve();
+        else reject(error);
+      }
+    });
   });
 }
 
@@ -80,7 +78,7 @@ function disableAutostart(key, callback) {
  */
 
 function isAutostartEnabled(key, callback) {
-  if (arguments.length !== 2) {
+  if (arguments.length < 1) {
     throw new Error('Not enough arguments passed to isAutostartEnabled()');
   }
 
@@ -88,12 +86,15 @@ function isAutostartEnabled(key, callback) {
     throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
-  else if (typeof(callback) !== 'function') {
-    throw new Error('Passed "callback" to disableAutostart() is not a function.');
-  }
-
-  autostart.isAutostartEnabled(key, function(error, isEnabled) {
-    callback(error, isEnabled);
+  return new Promise((resolve, reject) => {
+    autostart.isAutostartEnabled(key, function(error, isEnabled) {
+      if(typeof callback === 'function') {
+        callback(error, isEnabled);
+      } else {
+        if(!error) resolve(isEnabled);
+        else reject(error);
+      }
+    });
   });
 }
 

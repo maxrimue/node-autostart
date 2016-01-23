@@ -1,6 +1,9 @@
+require("babel-polyfill");
+
 var fs = require('fs'),
   os = require('os'),
-  username = require('username');
+  username = require('username'),
+  fileExists = require('file-exists');
 
 /**
  * Returns the path for the startup folder in Windows
@@ -19,10 +22,8 @@ function getWinStartupPath() {
 function enableAutostart(key, path, command, callback) {
   isAutostartEnabled(key, function(error, isEnabled) {
     if (error) {
-      if (error.code !== 'ENOENT') {
-        callback(error);
-        return;
-      }
+      callback(error);
+      return;
     }
 
     if (isEnabled) {
@@ -40,10 +41,8 @@ function enableAutostart(key, path, command, callback) {
 function disableAutostart(key, callback) {
   isAutostartEnabled(key, function(error, isEnabled) {
     if (error) {
-      if (error.code !== 'ENOENT') {
-        callback(error);
-        return;
-      }
+      callback(error);
+      return;
     }
 
     if (!isEnabled) {
@@ -58,17 +57,15 @@ function disableAutostart(key, callback) {
 }
 
 function isAutostartEnabled(key, callback) {
-  fs.stat(getWinStartupPath() + '/' + key + '.bat', function(error, stats) {
-    if (process.env.NODE_ENV === 'test' && process.env.FORCEERROR === true) {
-      error = new Error('Test error');
-    }
+  var err;
 
-    if (!error && stats.isFile()) {
-      callback(null, true);
-    } else {
-      callback(error, false);
-    }
-  });
+  if(process.env.FORCEERROR === 'true') {
+    err = new Error('Test error');
+  } else {
+    err = null;
+  }
+
+  callback(err, fileExists(getWinStartupPath() + '/' + key + '.bat'));
 }
 
 module.exports = {

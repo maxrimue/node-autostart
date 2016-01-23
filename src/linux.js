@@ -1,3 +1,5 @@
+require("babel-polyfill");
+
 var fs = require('fs'),
   crontab = require('crontab');
 
