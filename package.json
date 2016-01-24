@@ -26,7 +26,7 @@
     "mocha": "2.x.x"
   },
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 4"
   },
   "homepage": "https://github.com/maxrimue/node-autostart#readme",
   "keywords": [
