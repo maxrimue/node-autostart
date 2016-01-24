@@ -1,11 +1,8 @@
 'use strict()';
-
-require("babel-polyfill");
-
 const osName = process.platform;
 
 var fs = require('fs'),
-autostart = require('./' + osName + '.js');
+autostart = require('./lib/' + osName + '.js');
 
 /**
  * Enables autostart

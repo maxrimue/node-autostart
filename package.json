@@ -18,11 +18,9 @@
   },
   "description": "Enable autostart for your node apps",
   "devDependencies": {
-    "babel-cli": "^6.4.5",
-    "babel-preset-es2015": "^6.3.13",
     "chai": "3.x.x",
     "coveralls": "^2.11.4",
-    "babel-istanbul": "0.x.x",
+    "istanbul": "0.x.x",
     "mocha": "2.x.x"
   },
   "engines": {
@@ -48,8 +46,8 @@
     "url": "git+https://github.com/maxrimue/node-autostart.git"
   },
   "scripts": {
-    "coverage": "npm run build && babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
-    "test": "npm run build && babel-node ./node_modules/mocha/bin/_mocha",
+    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
+    "test": "mocha",
     "build": "babel src -d lib"
   },
   "version": "2.0.1"

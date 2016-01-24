@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-
-require("babel-polyfill");
-
 var fs = require('fs'),
   colors = require('colors'),
   username = require('username'),
