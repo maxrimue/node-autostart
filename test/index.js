@@ -33,11 +33,27 @@ describe('isAutostartEnabled(): callback:', function() {
       done();
     });
   });
+  it('should throw an error if FORCEERROR is enabled', function(done) {
+    process.env.FORCEERROR = true;
+    autostart.isAutostartEnabled('TestService1', function(error, isEnabled) {
+      expect(error).to.not.equal(null);
+      process.env.FORCEERROR = false;
+      done();
+    });
+  });
 });
 
 describe('isAutostartEnabled(): promise:', function() {
   it('should respond with isEnabled=false and not throw for fake service', function() {
     return autostart.isAutostartEnabled('TestService1').then(() => {});
+  });
+  it('should throw an error if FORCEERROR is enabled', function(done) {
+    process.env.FORCEERROR = true;
+    autostart.isAutostartEnabled('TestService1').catch((error) => {
+      expect(error).to.not.equal(null);
+      process.env.FORCEERROR = false;
+      done();
+    });
   });
 });
 
@@ -54,7 +70,7 @@ describe('enableAutostart(): callback:', function() {
       done();
     });
   });
-  it('should fail if fs.stats/crontab throws an error', function(done) {
+  it('should fail if crontab (linux) throws an error', function(done) {
     process.env.FORCEERROR = true;
     autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), function(error) {
       expect(error).to.not.equal(null);

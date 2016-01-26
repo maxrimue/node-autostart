@@ -29,16 +29,18 @@ function enableAutostart(key, command, path, callback) {
     throw new Error('Passed "path" to enableAutostart() is not a string.');
   }
 
-  return new Promise((resolve, reject) => {
-    autostart.enableAutostart(key, command, path, function(error) {
-      if(typeof callback === 'function') {
-        callback(error);
-      } else {
+  if(typeof callback !== 'function') {
+    return new Promise((resolve, reject) => {
+      autostart.enableAutostart(key, command, path, function(error) {
         if(!error) resolve();
         else reject(error);
-      }
+      });
     });
-  });
+  } else {
+    autostart.enableAutostart(key, command, path, function(error) {
+      callback(error);
+    });
+  }
 }
 
 /**
@@ -56,16 +58,18 @@ function disableAutostart(key, callback) {
     throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
-  return new Promise((resolve, reject) => {
-    autostart.disableAutostart(key, function(error) {
-      if(typeof callback === 'function') {
-        callback(error);
-      } else {
+  if(typeof callback !== 'function') {
+    return new Promise((resolve, reject) => {
+      autostart.disableAutostart(key, function(error) {
         if(!error) resolve();
         else reject(error);
-      }
+      });
     });
-  });
+  } else {
+    autostart.disableAutostart(key, function(error) {
+      callback(error);
+    });
+  }
 }
 
 /**
@@ -83,16 +87,18 @@ function isAutostartEnabled(key, callback) {
     throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
-  return new Promise((resolve, reject) => {
-    autostart.isAutostartEnabled(key, function(error, isEnabled) {
-      if(typeof callback === 'function') {
-        callback(error, isEnabled);
-      } else {
-        if(!error) resolve(isEnabled);
-        else reject(error);
-      }
+  if(typeof callback !== 'function') {
+    return new Promise((resolve, reject) => {
+      autostart.isAutostartEnabled(key, function(error, isEnabled) {
+          if(!error) resolve(isEnabled);
+          else reject(error);
+        });
     });
-  });
+  } else {
+    autostart.isAutostartEnabled(key, function(error, isEnabled) {
+      callback(error, isEnabled);
+    });
+  }
 }
 
 module.exports = {
