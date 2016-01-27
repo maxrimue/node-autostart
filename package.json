@@ -2,7 +2,7 @@
   "URL": "https://www.npmjs.com/package/node-autostart",
   "author": "Max Rittmüller",
   "bin": {
-    "autostart": "lib/cli.js"
+    "autostart": "cli.js"
   },
   "bugs": {
     "url": "https://github.com/maxrimue/node-autostart/issues"
@@ -20,6 +20,8 @@
   "devDependencies": {
     "chai": "3.x.x",
     "coveralls": "^2.11.4",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^4.0.0",
     "istanbul": "0.x.x",
     "mocha": "2.x.x"
   },
@@ -46,9 +48,8 @@
     "url": "git+https://github.com/maxrimue/node-autostart.git"
   },
   "scripts": {
-    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
-    "test": "mocha",
-    "build": "babel src -d lib"
+    "coverage": "eslint ./test/* ./lib/* index.js cli.js && node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
+    "test": "eslint ./test/* ./lib/* index.js cli.js && mocha"
   },
   "version": "2.0.1"
 }

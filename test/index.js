@@ -1,22 +1,16 @@
-'use strict()';
-
+'use strict';
 process.env.NODE_ENV = 'test';
+const expect = require('chai').expect;
+const autostart = require('../index.js');
 
-var assert = require('assert'),
-  expect = require('chai').expect,
-  os = require('os'),
-  exec = require('child_process').exec,
-  pathToJSON = (process.env.HOME || process.env.USERPROFILE) + '/.autostart.json',
-  autostart = require('../index.js');
-
-describe('Arguments', function() {
-  it('should not accept too few arguments', function() {
+describe('Arguments', () => {
+  it('should not accept too few arguments', () => {
     expect(() => autostart.enableAutostart('someString', 'anotherString')).to.throw(Error);
     expect(() => autostart.disableAutostart()).to.throw(Error);
     expect(() => autostart.isAutostartEnabled()).to.throw(Error);
   });
 
-  it('should not accept arguments with wrong types', function() {
+  it('should not accept arguments with wrong types', () => {
     expect(() => autostart.enableAutostart(1, 2, 3)).to.throw(Error);
     expect(() => autostart.enableAutostart('string', 2, 3)).to.throw(Error);
     expect(() => autostart.enableAutostart('string', 'string', 3)).to.throw(Error);
@@ -25,17 +19,17 @@ describe('Arguments', function() {
   });
 });
 
-describe('isAutostartEnabled(): callback:', function() {
-  it('should respond with isEnabled=false and not throw for fake service', function(done) {
-    autostart.isAutostartEnabled('TestService1', function(error, isEnabled) {
+describe('isAutostartEnabled(): callback:', () => {
+  it('should respond with isEnabled=false and not throw for fake service', (done) => {
+    autostart.isAutostartEnabled('TestService1', (error, isEnabled) => {
       expect(isEnabled).to.equal(false);
       expect(error).to.equal(null);
       done();
     });
   });
-  it('should throw an error if FORCEERROR is enabled', function(done) {
+  it('should throw an error if FORCEERROR is enabled', (done) => {
     process.env.FORCEERROR = true;
-    autostart.isAutostartEnabled('TestService1', function(error, isEnabled) {
+    autostart.isAutostartEnabled('TestService1', (error) => {
       expect(error).to.not.equal(null);
       process.env.FORCEERROR = false;
       done();
@@ -43,11 +37,13 @@ describe('isAutostartEnabled(): callback:', function() {
   });
 });
 
-describe('isAutostartEnabled(): promise:', function() {
-  it('should respond with isEnabled=false and not throw for fake service', function() {
-    return autostart.isAutostartEnabled('TestService1').then(() => {});
+describe('isAutostartEnabled(): promise:', () => {
+  it('should respond with isEnabled=false and not throw for fake service', () => {
+    return autostart.isAutostartEnabled('TestService1').then(() => {
+      return;
+    });
   });
-  it('should throw an error if FORCEERROR is enabled', function(done) {
+  it('should throw an error if FORCEERROR is enabled', (done) => {
     process.env.FORCEERROR = true;
     autostart.isAutostartEnabled('TestService1').catch((error) => {
       expect(error).to.not.equal(null);
@@ -57,22 +53,22 @@ describe('isAutostartEnabled(): promise:', function() {
   });
 });
 
-describe('enableAutostart(): callback:', function() {
-  it('should be able to create a test service', function(done) {
-    autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), function(error) {
+describe('enableAutostart(): callback:', () => {
+  it('should be able to create a test service', (done) => {
+    autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), (error) => {
       expect(error).to.equal(null);
       done();
     });
   });
-  it('should refuse to create a service with the name of an already existing one', function(done) {
-    autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), function(error) {
+  it('should refuse to create a service with the name of an already existing one', (done) => {
+    autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), (error) => {
       expect(error).to.equal('Autostart already is enabled');
       done();
     });
   });
-  it('should fail if crontab (linux) throws an error', function(done) {
+  it('should fail if crontab (linux) throws an error', (done) => {
     process.env.FORCEERROR = true;
-    autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), function(error) {
+    autostart.enableAutostart('TestService1', 'echo "test"', process.cwd(), (error) => {
       expect(error).to.not.equal(null);
       process.env.FORCEERROR = false;
       done();
@@ -80,17 +76,17 @@ describe('enableAutostart(): callback:', function() {
   });
 });
 
-describe('enableAutostart(): promise:', function() {
-  it('should be able to create a test service', function() {
+describe('enableAutostart(): promise:', () => {
+  it('should be able to create a test service', () => {
     return autostart.enableAutostart('TestService2', 'echo "test"', process.cwd()).then(() => {});
   });
-  it('should refuse to create a service with the name of an already existing one', function(done) {
+  it('should refuse to create a service with the name of an already existing one', (done) => {
     autostart.enableAutostart('TestService2', 'echo "test"', process.cwd()).catch((error) => {
       expect(error).to.equal('Autostart already is enabled');
       done();
     });
   });
-  it('should fail if crontab (linux) throws an error', function(done) {
+  it('should fail if crontab (linux) throws an error', (done) => {
     process.env.FORCEERROR = true;
     autostart.enableAutostart('TestService2', 'echo "test"', process.cwd()).catch((error) => {
       expect(error).to.not.equal(null);
@@ -100,22 +96,22 @@ describe('enableAutostart(): promise:', function() {
   });
 });
 
-describe('disableAutostart(): callback:', function() {
-  it('should be able to delete the test service', function(done) {
-    autostart.disableAutostart('TestService1', function(error) {
+describe('disableAutostart(): callback:', () => {
+  it('should be able to delete the test service', (done) => {
+    autostart.disableAutostart('TestService1', (error) => {
       expect(error).to.equal(null);
       done();
     });
   });
-  it('should refuse to remove nonexistant service', function(done) {
-    autostart.disableAutostart('TestService1', function(error) {
+  it('should refuse to remove nonexistant service', (done) => {
+    autostart.disableAutostart('TestService1', (error) => {
       expect(error).to.equal('Autostart is not enabled');
       done();
     });
   });
-  it('should fail if crontab (linux) throws an error', function(done) {
+  it('should fail if crontab (linux) throws an error', (done) => {
     process.env.FORCEERROR = true;
-    autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', function(error) {
+    autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake', (error) => {
       expect(error).to.not.equal(null);
       process.env.FORCEERROR = false;
       done();
@@ -123,17 +119,17 @@ describe('disableAutostart(): callback:', function() {
   });
 });
 
-describe('disableAutostart(): promise:', function() {
-  it('should be able to delete the test service', function() {
+describe('disableAutostart(): promise:', () => {
+  it('should be able to delete the test service', () => {
     return autostart.disableAutostart('TestService2').then(() => {});
   });
-  it('should refuse to remove nonexistant service', function(done) {
+  it('should refuse to remove nonexistant service', (done) => {
     autostart.disableAutostart('TestService2').catch((error) => {
       expect(error).to.equal('Autostart is not enabled');
       done();
     });
   });
-  it('should fail if crontab (linux) throws an error', function(done) {
+  it('should fail if crontab (linux) throws an error', (done) => {
     process.env.FORCEERROR = true;
     autostart.disableAutostart('SomeNameIHopeNobodyWillEverTake').catch((error) => {
       expect(error).to.not.equal(null);
