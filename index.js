@@ -1,6 +1,20 @@
 'use strict';
-const osName = process.platform;
-const autostart = require(`./lib/${osName}.js`);
+
+let autostart;
+/* istanbul ignore next */
+switch (process.platform) {
+  case 'darwin':
+    autostart = require('./lib/darwin.js');
+    break;
+  case 'linux':
+    autostart = require('./lib/linux.js');
+    break;
+  case 'win32':
+    autostart = require('./lib/win32.js');
+    break;
+  default:
+    autostart = null;
+}
 
 function enableAutostart(key, command, path, callback) {
   if (arguments.length < 3) {
