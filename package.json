@@ -11,7 +11,7 @@
     "colors": "1.x.x",
     "crontab": "1.x.x",
     "username": "1.x.x",
-    "yargs": "3.x.x"
+    "yargs": "4.1.0"
   },
   "description": "Enable autostart for your node apps",
   "devDependencies": {
