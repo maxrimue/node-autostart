@@ -1,120 +1,64 @@
-'use strict()';
+'use strict';
 
-const osName = process.platform;
-
-var fs = require('fs'),
-autostart = require('./lib/' + osName + '.js');
-
-/**
- * Changes .autostart file in $HOME path
- * @param {Boolean} Autostart enabled? (If false = disabled)
- * @param {String} Key
- * @param {String} Path
- * @param {String} Command
- */
-function modifyHomeFile(isEnabled, key, command, path) {
-  var fileExists = true, content;
-
-  try {
-    if(process.env.NODE_ENV === 'test' && process.env.FORCENOJSON === 'true') {
-      throw new Error();
-    }
-    else {
-      fs.statSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json');
-    }
-  } catch (e) {
-    fileExists = false;
-  }
-
-  if (isEnabled) {
-    if (fileExists) {
-      content = JSON.parse(fs.readFileSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json', 'utf-8'));
-    } else {
-      content = {};
-    }
-    content[key] = {
-      'path': path,
-      'command': command
-    };
-  } else {
-    if (fileExists) {
-      content = JSON.parse(fs.readFileSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json', 'utf-8'));
-    } else {
-      content = {};
-    }
-    delete content[key];
-  }
-
-  fs.writeFileSync((process.env.HOME || process.env.USERPROFILE) + '/.autostart.json', JSON.stringify(content), 'utf8');
+let autostart;
+/* istanbul ignore next */
+switch (process.platform) {
+  case 'darwin':
+    autostart = require('./lib/darwin.js');
+    break;
+  case 'linux':
+    autostart = require('./lib/linux.js');
+    break;
+  case 'win32':
+    autostart = require('./lib/win32.js');
+    break;
+  default:
+    autostart = null;
 }
 
-/**
- * Enables autostart
- * @param {String} key
- * @param {String} command
- * @param {String} path
- * @param {Function} callback
- */
-
 function enableAutostart(key, command, path, callback) {
-  if (!key || !command || !path || !callback) {
+  if (arguments.length < 3) {
     throw new Error('Not enough arguments passed to enableAutostart()');
-  }
-
-  else if (typeof(key) !== 'string') {
+  } else if (typeof(key) !== 'string') {
     throw new Error('Passed "key" to enableAutostart() is not a string.');
-  }
-
-  else if (typeof(command) !== 'string') {
+  } else if (typeof(command) !== 'string') {
     throw new Error('Passed "command" to enableAutostart() is not a string.');
-  }
-
-  else if (typeof(path) !== 'string') {
+  } else if (typeof(path) !== 'string') {
     throw new Error('Passed "path" to enableAutostart() is not a string.');
   }
 
-  else if (typeof(callback) !== 'function') {
-    throw new Error('Passed "callback" to enableAutostart() is not a function.');
+  if (typeof callback !== 'function') {
+    return new Promise((resolve, reject) => {
+      autostart.enableAutostart(key, command, path, (error) => {
+        if (!error) resolve();
+        else reject(error);
+      });
+    });
   }
 
-  autostart.enableAutostart(key, command, path, function(error) {
-    if(error) {
-      callback(error);
-    }
-    else {
-      modifyHomeFile(true, key, command, path);
-      callback(null);
-    }
+  return autostart.enableAutostart(key, command, path, (error) => {
+    callback(error);
   });
 }
 
-/**
- * Disables autostart
- * @param {String} key
- * @param {Function} callback
- */
-
 function disableAutostart(key, callback) {
-  if (!key || !callback) {
+  if (arguments.length < 1) {
     throw new Error('Not enough arguments passed to disableAutostart()');
-  }
-
-  else if (typeof(key) !== 'string') {
+  } else if (typeof(key) !== 'string') {
     throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
-  else if (typeof(callback) !== 'function') {
-    throw new Error('Passed "callback" to disableAutostart() is not a function.');
+  if (typeof callback !== 'function') {
+    return new Promise((resolve, reject) => {
+      autostart.disableAutostart(key, (error) => {
+        if (!error) resolve();
+        else reject(error);
+      });
+    });
   }
 
-  autostart.disableAutostart(key, function(error) {
-    if(error) {
-      callback(error);
-    }
-    else {
-      modifyHomeFile(false, key);
-      callback(null);
-    }
+  autostart.disableAutostart(key, (error) => {
+    callback(error);
   });
 }
 
@@ -125,25 +69,28 @@ function disableAutostart(key, callback) {
  */
 
 function isAutostartEnabled(key, callback) {
-  if (!key || !callback) {
+  if (arguments.length < 1) {
     throw new Error('Not enough arguments passed to isAutostartEnabled()');
-  }
-
-  else if (typeof(key) !== 'string') {
+  } else if (typeof(key) !== 'string') {
     throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
-  else if (typeof(callback) !== 'function') {
-    throw new Error('Passed "callback" to disableAutostart() is not a function.');
+  if (typeof callback !== 'function') {
+    return new Promise((resolve, reject) => {
+      autostart.isAutostartEnabled(key, (error, isEnabled) => {
+        if (!error) resolve(isEnabled);
+        else reject(error);
+      });
+    });
   }
 
-  autostart.isAutostartEnabled(key, function(error, isEnabled) {
+  autostart.isAutostartEnabled(key, (error, isEnabled) => {
     callback(error, isEnabled);
   });
 }
 
 module.exports = {
-  enableAutostart: enableAutostart,
-  disableAutostart: disableAutostart,
-  isAutostartEnabled: isAutostartEnabled
+  enableAutostart,
+  disableAutostart,
+  isAutostartEnabled,
 };
