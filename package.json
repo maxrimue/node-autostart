@@ -8,20 +8,25 @@
     "url": "https://github.com/maxrimue/node-autostart/issues"
   },
   "dependencies": {
+    "babel-polyfill": "^6.3.14",
     "colors": "1.x.x",
     "crontab": "1.x.x",
-    "username": "1.x.x",
+    "file-exists": "^1.0.0",
+    "mock-fs": "^3.6.0",
+    "username": "2.x.x",
     "yargs": "3.x.x"
   },
   "description": "Enable autostart for your node apps",
   "devDependencies": {
     "chai": "3.x.x",
     "coveralls": "^2.11.4",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^4.0.0",
     "istanbul": "0.x.x",
     "mocha": "2.x.x"
   },
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 4"
   },
   "homepage": "https://github.com/maxrimue/node-autostart#readme",
   "keywords": [
@@ -36,15 +41,15 @@
     "cronjob"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/index.js",
   "name": "node-autostart",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maxrimue/node-autostart.git"
   },
   "scripts": {
-    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
-    "test": "mocha"
+    "coverage": "eslint ./test/* ./lib/* index.js cli.js && node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
+    "test": "eslint ./test/* ./lib/* index.js cli.js && mocha"
   },
-  "version": "2.0.1"
+  "version": "3.0.0"
 }

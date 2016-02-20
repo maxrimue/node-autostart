@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/maxrimue/node-autostart.svg)](https://travis-ci.org/maxrimue/node-autostart)
 [![Build status](https://ci.appveyor.com/api/projects/status/rm9qiglp1lafov9u?svg=true)](https://ci.appveyor.com/project/maxrimue/node-autostart)
 [![Coverage Status](https://coveralls.io/repos/maxrimue/node-autostart/badge.svg?branch=master&service=github)](https://coveralls.io/github/maxrimue/node-autostart?branch=master)
-[![Dependency Status](https://david-dm.org/maxrimue/node-autostart.svg)](https://david-dm.org/maxrimue/node-autostart) [![devDependency Status](https://david-dm.org/maxrimue/node-autostart/dev-status.svg)](https://david-dm.org/maxrimue/node-autostart#info=devDependencies) 
+[![Dependency Status](https://david-dm.org/maxrimue/node-autostart.svg)](https://david-dm.org/maxrimue/node-autostart) [![devDependency Status](https://david-dm.org/maxrimue/node-autostart/dev-status.svg)](https://david-dm.org/maxrimue/node-autostart#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/node-autostart.svg)](https://www.npmjs.com/package/node-autostart)
 
 node-autostart is a Node.js module that enables your module to activate autostart easily. You can also use it as a global module to set-up autostart for anything and anywhere via the command line interface (CLI). Currently, it supports:
@@ -21,13 +21,6 @@ for use in CLI, and:
 npm install --save node-autostart
 ```   
 as a dependency for your module.
-
-### Following features could be implemented:
-
-- [x] `.autostart` file in your `$HOME` folder to keep track of current activated services
-- [x] `doctor`-function to remove old services that got forgotten
-
-Pull requests are _very_ appreciated!
 
 ## Documentation
 You can use `node-autostart` both programmatically and per CLI. 'Enabling autostart' means to make the OS run a certain command at logon of the user who 'enabled the autostart' via a program. The command could be, for example, `npm start` in a certain directory, or whatever floats your boat. Here's an example for use via the CLI:   
@@ -72,6 +65,30 @@ autostart.isAutostartEnabled(key, function (err, isEnabled) {
   }
 
 })
+```
+If you wish, you can also use Promises instead of Callbacks:
+```javascript
+autostart.enableAutostart(key, command, path).then(() => {
+  // Success!
+}).catch((err) => {
+  console.error(err);
+  // Something bad happened
+});
+
+autostart.disableAutostart(key).then(() => {
+  // Success!
+}).catch((err) => {
+  console.error(err);
+  // Something bad happened
+});
+
+autostart.isAutostartEnabled(key).then((isEnabled) => {
+  console.log('Autostart is ' + isEnabled ? 'enabled' : 'not enabled');
+  // Success!
+}).catch((err) => {
+  console.error(err);
+  // Something bad happened
+});
 ```
 #### Variables
 `key`: Unique identifier for startup items (always required! (Make it unique))
