@@ -51,5 +51,5 @@
     "coverage": "eslint ./test/* ./lib/* index.js cli.js && node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
     "test": "eslint ./test/* ./lib/* index.js cli.js && mocha"
   },
-  "version": "2.0.1"
+  "version": "3.0.0"
 }
