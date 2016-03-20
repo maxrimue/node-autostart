@@ -14,7 +14,7 @@
     "file-exists": "^1.0.0",
     "mock-fs": "^3.6.0",
     "username": "2.x.x",
-    "yargs": "4.2.0"
+    "yargs": "4.3.2"
   },
   "description": "Enable autostart for your node apps",
   "devDependencies": {
