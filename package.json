@@ -20,7 +20,7 @@
   "devDependencies": {
     "chai": "3.x.x",
     "coveralls": "^2.11.4",
-    "eslint": "^2.3.0",
+    "eslint": "^2.5.0",
     "eslint-config-airbnb": "^6.0.2",
     "istanbul": "0.x.x",
     "mocha": "2.x.x"
