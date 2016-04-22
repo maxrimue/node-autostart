@@ -8,7 +8,6 @@
     "url": "https://github.com/maxrimue/node-autostart/issues"
   },
   "dependencies": {
-    "babel-polyfill": "^6.3.14",
     "colors": "1.x.x",
     "crontab": "1.x.x",
     "file-exists": "^1.0.0",
