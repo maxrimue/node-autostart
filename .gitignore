@@ -13,6 +13,7 @@ pids
 node_modules
 
 # Coverage information
+.nyc_output
 coverage
 
 # Mac stuff
