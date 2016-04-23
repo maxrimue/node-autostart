@@ -19,10 +19,9 @@
   "devDependencies": {
     "chai": "3.x.x",
     "coveralls": "^2.11.4",
-    "eslint": "^2.5.0",
-    "eslint-config-airbnb": "^6.0.2",
     "mocha": "2.x.x",
-    "nyc": "^6.4.0"
+    "nyc": "^6.4.0",
+    "xo": "^0.14.0"
   },
   "engines": {
     "node": ">= 4"
@@ -48,7 +47,14 @@
   },
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test": "eslint ./test/* ./lib/* index.js cli.js && nyc mocha"
+    "test": "xo && nyc mocha"
   },
-  "version": "3.0.0"
+  "version": "3.0.0",
+  "xo": {
+    "space": true,
+    "rules": {
+      "no-unused-expressions": 0,
+      "no-undef": 0
+    }
+  }
 }

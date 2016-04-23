@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 'use strict';
+const yargs = require('yargs');
 const autostart = require('./index.js');
 
-require('yargs')
+yargs
 .usage('Usage: $0 <command> [options]')
 .command('enable', 'Enable autostart here with a custom key', (yargs, argv) => {
   argv = yargs
@@ -11,21 +12,21 @@ require('yargs')
       alias: 'name',
       describe: 'Name of the key for identifying startup objects',
       type: 'string',
-      nargs: 1,
+      nargs: 1
     })
     .option('c', {
       demand: false,
       alias: 'command',
       describe: 'Command to execute in the path',
       type: 'string',
-      default: 'npm start',
+      default: 'npm start'
     })
     .option('p', {
       demand: false,
       alias: 'path',
       describe: 'Place of execution of command',
       type: 'string',
-      default: process.cwd(),
+      default: process.cwd()
     })
     .help('h')
     .alias('h', 'help')
@@ -50,7 +51,7 @@ require('yargs')
       alias: 'name',
       describe: 'Name of the key for identifying startup objecst',
       type: 'string',
-      nargs: 1,
+      nargs: 1
     })
     .help('h')
     .alias('h', 'help')
@@ -75,7 +76,7 @@ require('yargs')
       alias: 'name',
       describe: 'Name of the key for identifying startup objects',
       type: 'string',
-      nargs: 1,
+      nargs: 1
     })
     .help('h')
     .alias('h', 'help')

@@ -19,19 +19,22 @@ switch (process.platform) {
 function enableAutostart(key, command, path, callback) {
   if (arguments.length < 3) {
     throw new Error('Not enough arguments passed to enableAutostart()');
-  } else if (typeof(key) !== 'string') {
+  } else if (typeof (key) !== 'string') {
     throw new Error('Passed "key" to enableAutostart() is not a string.');
-  } else if (typeof(command) !== 'string') {
+  } else if (typeof (command) !== 'string') {
     throw new Error('Passed "command" to enableAutostart() is not a string.');
-  } else if (typeof(path) !== 'string') {
+  } else if (typeof (path) !== 'string') {
     throw new Error('Passed "path" to enableAutostart() is not a string.');
   }
 
   if (typeof callback !== 'function') {
     return new Promise((resolve, reject) => {
       autostart.enableAutostart(key, command, path, (error) => {
-        if (!error) resolve();
-        else reject(error);
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
       });
     });
   }
@@ -44,15 +47,18 @@ function enableAutostart(key, command, path, callback) {
 function disableAutostart(key, callback) {
   if (arguments.length < 1) {
     throw new Error('Not enough arguments passed to disableAutostart()');
-  } else if (typeof(key) !== 'string') {
+  } else if (typeof (key) !== 'string') {
     throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
   if (typeof callback !== 'function') {
     return new Promise((resolve, reject) => {
       autostart.disableAutostart(key, (error) => {
-        if (!error) resolve();
-        else reject(error);
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
       });
     });
   }
@@ -71,15 +77,18 @@ function disableAutostart(key, callback) {
 function isAutostartEnabled(key, callback) {
   if (arguments.length < 1) {
     throw new Error('Not enough arguments passed to isAutostartEnabled()');
-  } else if (typeof(key) !== 'string') {
+  } else if (typeof (key) !== 'string') {
     throw new Error('Passed "key" to disableAutostart() is not a string.');
   }
 
   if (typeof callback !== 'function') {
     return new Promise((resolve, reject) => {
       autostart.isAutostartEnabled(key, (error, isEnabled) => {
-        if (!error) resolve(isEnabled);
-        else reject(error);
+        if (error) {
+          reject(error);
+        } else {
+          resolve(isEnabled);
+        }
       });
     });
   }
@@ -92,5 +101,5 @@ function isAutostartEnabled(key, callback) {
 module.exports = {
   enableAutostart,
   disableAutostart,
-  isAutostartEnabled,
+  isAutostartEnabled
 };
