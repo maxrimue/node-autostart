@@ -1,18 +1,11 @@
-language:
-  - c
+language: node_js
+
 os:
   - linux
   - osx
-sudo: false
-install:
-  - rm -rf ~/.nvm
-  - git clone https://github.com/creationix/nvm.git ~/.nvm
-  - source ~/.nvm/nvm.sh
-  - nvm install $NODE_VERSION
-  - node --version
-  - npm install
-script: npm test
+
 after_success: "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-env:
-  - NODE_VERSION="4"
-  - NODE_VERSION="5"
+
+node_js:
+  - "4"
+  - "5"
