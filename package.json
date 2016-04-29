@@ -45,6 +45,11 @@
     "type": "git",
     "url": "git+https://github.com/maxrimue/node-autostart.git"
   },
+  "files": [
+    "lib",
+    "cli.js",
+    "index.js"
+  ],
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "xo && nyc mocha"
