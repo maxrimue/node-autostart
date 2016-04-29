@@ -54,6 +54,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "xo && nyc mocha"
   },
+  "license": "MIT",
   "version": "3.0.0",
   "xo": {
     "space": true,
