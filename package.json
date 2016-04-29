@@ -54,7 +54,8 @@
     "space": true,
     "rules": {
       "no-unused-expressions": 0,
-      "no-undef": 0
+      "no-undef": 0,
+      "xo/filename-case": 0
     }
   }
 }
