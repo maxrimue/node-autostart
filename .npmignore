@@ -1,0 +1,5 @@
+test
+.travis.yml
+appveyor.yml
+.nyc_output
+worklog
