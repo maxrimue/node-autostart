@@ -49,7 +49,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "xo && nyc mocha"
   },
-  "version": "3.0.1",
+  "version": "3.0.2",
   "xo": {
     "space": true,
     "rules": {
