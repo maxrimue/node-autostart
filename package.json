@@ -18,7 +18,7 @@
   "description": "Enable autostart for your node apps",
   "devDependencies": {
     "chai": "3.x.x",
-    "coveralls": "^2.11.4",
+    "coveralls": "^2.11.12",
     "mocha": "2.x.x",
     "nyc": "^7.0.0",
     "xo": "^0.15.0"
