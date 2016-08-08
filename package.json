@@ -19,7 +19,7 @@
   "devDependencies": {
     "chai": "3.x.x",
     "coveralls": "^2.11.12",
-    "mocha": "3.0.1",
+    "mocha": "3.0.2",
     "nyc": "^7.0.0",
     "xo": "^0.15.0"
   },
