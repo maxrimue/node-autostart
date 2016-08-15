@@ -29,7 +29,7 @@ function enableAutostart(key, command, path, callback) {
 
   if (typeof callback !== 'function') {
     return new Promise((resolve, reject) => {
-      autostart.enableAutostart(key, command, path, (error) => {
+      autostart.enableAutostart(key, command, path, error => {
         if (error) {
           reject(error);
         } else {
@@ -39,7 +39,7 @@ function enableAutostart(key, command, path, callback) {
     });
   }
 
-  return autostart.enableAutostart(key, command, path, (error) => {
+  return autostart.enableAutostart(key, command, path, error => {
     callback(error);
   });
 }
@@ -53,7 +53,7 @@ function disableAutostart(key, callback) {
 
   if (typeof callback !== 'function') {
     return new Promise((resolve, reject) => {
-      autostart.disableAutostart(key, (error) => {
+      autostart.disableAutostart(key, error => {
         if (error) {
           reject(error);
         } else {
@@ -63,7 +63,7 @@ function disableAutostart(key, callback) {
     });
   }
 
-  autostart.disableAutostart(key, (error) => {
+  autostart.disableAutostart(key, error => {
     callback(error);
   });
 }

@@ -33,7 +33,7 @@ yargs
     .showHelpOnFail(false, 'Use --help for further information')
     .argv;
 
-  autostart.enableAutostart(argv.n, argv.c, argv.p, (err) => {
+  autostart.enableAutostart(argv.n, argv.c, argv.p, err => {
     if (err) {
       console.error('An error occured while trying to enable autostart, here are the details:');
       console.error(err);
@@ -58,7 +58,7 @@ yargs
     .showHelpOnFail(false, 'Use --help for further information')
     .argv;
 
-  autostart.disableAutostart(argv.n, (err) => {
+  autostart.disableAutostart(argv.n, err => {
     if (err) {
       console.error('An error occured while trying to disable autostart, here are the details:');
       console.error(err);
