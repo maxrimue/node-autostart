@@ -1,4 +1,6 @@
 # node-autostart   
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/maxrimue/node-autostart.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/maxrimue/node-autostart.svg)](https://travis-ci.org/maxrimue/node-autostart)
 [![Build status](https://ci.appveyor.com/api/projects/status/rm9qiglp1lafov9u?svg=true)](https://ci.appveyor.com/project/maxrimue/node-autostart)
 [![Coverage Status](https://coveralls.io/repos/maxrimue/node-autostart/badge.svg?branch=master&service=github)](https://coveralls.io/github/maxrimue/node-autostart?branch=master)
