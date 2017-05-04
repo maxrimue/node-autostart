@@ -20,11 +20,11 @@ function enableAutostart(key, command, path, callback) {
   if (arguments.length < 3) {
     throw new Error('Not enough arguments passed to enableAutostart()');
   } else if (typeof key !== 'string') {
-    throw new Error('Passed "key" to enableAutostart() is not a string.');
+    throw new TypeError('Passed "key" to enableAutostart() is not a string.');
   } else if (typeof command !== 'string') {
-    throw new Error('Passed "command" to enableAutostart() is not a string.');
+    throw new TypeError('Passed "command" to enableAutostart() is not a string.');
   } else if (typeof path !== 'string') {
-    throw new Error('Passed "path" to enableAutostart() is not a string.');
+    throw new TypeError('Passed "path" to enableAutostart() is not a string.');
   }
 
   if (typeof callback !== 'function') {
@@ -48,7 +48,7 @@ function disableAutostart(key, callback) {
   if (arguments.length < 1) {
     throw new Error('Not enough arguments passed to disableAutostart()');
   } else if (typeof key !== 'string') {
-    throw new Error('Passed "key" to disableAutostart() is not a string.');
+    throw new TypeError('Passed "key" to disableAutostart() is not a string.');
   }
 
   if (typeof callback !== 'function') {
@@ -78,7 +78,7 @@ function isAutostartEnabled(key, callback) {
   if (arguments.length < 1) {
     throw new Error('Not enough arguments passed to isAutostartEnabled()');
   } else if (typeof key !== 'string') {
-    throw new Error('Passed "key" to disableAutostart() is not a string.');
+    throw new TypeError('Passed "key" to disableAutostart() is not a string.');
   }
 
   if (typeof callback !== 'function') {

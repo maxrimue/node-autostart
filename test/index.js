@@ -39,9 +39,7 @@ describe('isAutostartEnabled(): callback:', () => {
 
 describe('isAutostartEnabled(): promise:', () => {
   it('should respond with isEnabled=false and not throw for fake service', () => {
-    return autostart.isAutostartEnabled('TestService1').then(() => {
-      return;
-    });
+    return autostart.isAutostartEnabled('TestService1');
   });
   it('should throw an error if FORCEERROR is enabled', done => {
     process.env.FORCEERROR = true;
