@@ -10,7 +10,7 @@
   "dependencies": {
     "colors": "1.x.x",
     "crontab": "1.x.x",
-    "file-exists": "^2.0.0",
+    "file-exists": "^4.0.0",
     "mock-fs": "^4.0.0",
     "username": "2.x.x",
     "yargs": "^7.0.1"
