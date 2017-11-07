@@ -1,0 +1,90 @@
+{
+  "name": "maxrimue/node-autostart",
+  "version": "0.1.4",
+  "libraries": {
+    "xv": "^1.1.25"
+  },
+  "title": "",
+  "branch": "",
+  "style": {
+    "name": "Material",
+    "componentSet": {
+      "nav": "nav/DarkAbsoluteNav",
+      "header": "header/GradientHeader",
+      "article": "article/BasicArticle",
+      "footer": "footer/BasicFooter"
+    },
+    "fontFamily": "Roboto, sans-serif",
+    "heading": {
+      "fontWeight": 500,
+      "letterSpacing": "-0.01em"
+    },
+    "colors": {
+      "text": "#212121",
+      "background": "#fff",
+      "primary": "#2196f3",
+      "secondary": "#1565c0",
+      "highlight": "#ff4081",
+      "border": "#e0e0e0",
+      "muted": "#f5f5f5"
+    },
+    "layout": {
+      "centered": true,
+      "bannerHeight": "80vh",
+      "maxWidth": 896
+    }
+  },
+  "content": [
+    {
+      "component": "nav",
+      "links": [
+        {
+          "href": "https://github.com/maxrimue/node-autostart",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://npmjs.com/package/node-autostart",
+          "text": "npm"
+        }
+      ]
+    },
+    {
+      "component": "header",
+      "heading": "node-autostart",
+      "subhead": "manage autostart items in CLI and with an API",
+      "children": [
+        {
+          "component": "ui/TweetButton",
+          "text": "node-autostart: manage autostart items in CLI and with an API",
+          "url": ""
+        },
+        {
+          "component": "ui/GithubButton",
+          "user": "maxrimue",
+          "repo": "node-autostart"
+        }
+      ],
+      "text": "v3.0.3"
+    },
+    {
+      "component": "article",
+      "metadata": {
+        "source": "github.readme"
+      },
+      "html": "\n<p><a href=\"https://travis-ci.org/maxrimue/node-autostart\"><img src=\"https://travis-ci.org/maxrimue/node-autostart.svg\"></a>\n<a href=\"https://ci.appveyor.com/project/maxrimue/node-autostart\"><img src=\"https://ci.appveyor.com/api/projects/status/rm9qiglp1lafov9u?svg=true\"></a>\n<a href=\"https://coveralls.io/github/maxrimue/node-autostart?branch=master\"><img src=\"https://coveralls.io/repos/maxrimue/node-autostart/badge.svg?branch=master&amp;service=github\"></a>\n<a href=\"https://david-dm.org/maxrimue/node-autostart\"><img src=\"https://david-dm.org/maxrimue/node-autostart.svg\"></a> <a href=\"https://david-dm.org/maxrimue/node-autostart#info=devDependencies\"><img src=\"https://david-dm.org/maxrimue/node-autostart/dev-status.svg\"></a>\n<a href=\"https://www.npmjs.com/package/node-autostart\"><img src=\"https://img.shields.io/npm/dt/node-autostart.svg\"></a></p>\n<p>node-autostart is a Node.js module that enables your module to activate autostart easily. You can also use it as a global module to set-up autostart for anything and anywhere via the command line interface (CLI). Currently, it supports:</p>\n<ul>\n<li>[x] Linux</li>\n<li>[x] OS X</li>\n<li>[x] Windows</li>\n</ul>\n<h3>Install:</h3>\n<pre>npm install -g <span class=\"hljs-keyword\">node</span><span class=\"hljs-title\">-autostart</span></pre><p>for use in CLI, and:   </p>\n<pre>npm install --save <span class=\"hljs-keyword\">node</span><span class=\"hljs-title\">-autostart</span></pre><p>as a dependency for your module.</p>\n<h2>Documentation</h2>\n<p>You can use <code>node-autostart</code> both programmatically and per CLI. &apos;Enabling autostart&apos; means to make the OS run a certain command at logon of the user who &apos;enabled the autostart&apos; via a program. The command could be, for example, <code>npm start</code> in a certain directory, or whatever floats your boat. Here&apos;s an example for use via the CLI:   </p>\n<pre>  autostart enable -n <span class=\"hljs-string\">&quot;MyAwesomeApp&quot;</span> -<span class=\"hljs-selector-tag\">p</span> <span class=\"hljs-string\">&quot;/home/me/MyAwesomeApp&quot;</span> -c <span class=\"hljs-string\">&quot;npm start&quot;</span></pre><p>to enable,</p>\n<pre>  autostart<span class=\"hljs-built_in\"> check </span>-n <span class=\"hljs-string\">&quot;MyAwesomeApp&quot;</span></pre><p>to see if it is enabled, and:</p>\n<pre>  autostart <span class=\"hljs-built_in\">disable</span> -n <span class=\"hljs-string\">&quot;MyAwesomeApp&quot;</span></pre><p>to disable it.\nTo use it inside your Node.js app, look at the <b>API for Programmatic Use</b>, if you want to use it in the CLI, use <code>autostart -h</code> for further information.</p>\n<h3>API for Programmatic Use</h3>\n<p>First, require this module inside your app like this:</p>\n<pre><span class=\"hljs-keyword\">var</span> autostart = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">&apos;node-autostart&apos;</span>)</pre><p>Now, you can simply enable autostart and disable it, and you can also check if it is enabled:</p>\n<pre>autostart.enableAutostart(key, command, path, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> (<span class=\"hljs-params\">err</span>) </span>{\n  <span class=\"hljs-keyword\">if</span>(err) <span class=\"hljs-built_in\">console</span>.error(err);\n})\n\nautostart.disableAutostart(key, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> (<span class=\"hljs-params\">err</span>) </span>{\n  <span class=\"hljs-keyword\">if</span>(err) <span class=\"hljs-built_in\">console</span>.error(err);\n})\n\nautostart.isAutostartEnabled(key, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> (<span class=\"hljs-params\">err, isEnabled</span>) </span>{\n  <span class=\"hljs-keyword\">if</span>(err) <span class=\"hljs-built_in\">console</span>.error(err);\n\n  <span class=\"hljs-keyword\">if</span>(isEnabled) {\n    <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">&apos;Autostart is enabled&apos;</span>);\n  }\n  <span class=\"hljs-keyword\">else</span> {\n    <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">&apos;Autostart is not enabled&apos;</span>);\n  }\n\n})</pre><p>If you wish, you can also use Promises instead of Callbacks:</p>\n<pre>autostart.enableAutostart(key, command, path).then(<span class=\"hljs-function\"><span class=\"hljs-params\">()</span> =&gt;</span> {\n  <span class=\"hljs-comment\">// Success!</span>\n}).catch(<span class=\"hljs-function\">(<span class=\"hljs-params\">err</span>) =&gt;</span> {\n  <span class=\"hljs-built_in\">console</span>.error(err);\n  <span class=\"hljs-comment\">// Something bad happened</span>\n});\n\nautostart.disableAutostart(key).then(<span class=\"hljs-function\"><span class=\"hljs-params\">()</span> =&gt;</span> {\n  <span class=\"hljs-comment\">// Success!</span>\n}).catch(<span class=\"hljs-function\">(<span class=\"hljs-params\">err</span>) =&gt;</span> {\n  <span class=\"hljs-built_in\">console</span>.error(err);\n  <span class=\"hljs-comment\">// Something bad happened</span>\n});\n\nautostart.isAutostartEnabled(key).then(<span class=\"hljs-function\">(<span class=\"hljs-params\">isEnabled</span>) =&gt;</span> {\n  <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">&apos;Autostart is &apos;</span> + isEnabled ? <span class=\"hljs-string\">&apos;enabled&apos;</span> : <span class=\"hljs-string\">&apos;not enabled&apos;</span>);\n  <span class=\"hljs-comment\">// Success!</span>\n}).catch(<span class=\"hljs-function\">(<span class=\"hljs-params\">err</span>) =&gt;</span> {\n  <span class=\"hljs-built_in\">console</span>.error(err);\n  <span class=\"hljs-comment\">// Something bad happened</span>\n});</pre><h4>Variables</h4>\n<p><code>key</code>: Unique identifier for startup items (always required! (Make it unique))</p>\n<p><code>command</code>: Command to be executed in the specified path</p>\n<p><code>path</code>: Place in which the command will be executed (Use <code>process.cwd()</code> if you just want it to happen in your current working directory)</p>\n<h4>Functions</h4>\n<p><code>.enableAutostart</code>\nRequires <code>key</code>, <code>command</code> and <code>path</code>, returns <code>err</code>.</p>\n<p><code>.disableAutostart</code>\nRequires <code>key</code>, returns <code>err</code>.</p>\n<p><code>.isAutostartEnabled</code>\nRequires <code>key</code>, returns <code>err</code> and <code>isEnabled</code>.</p>\n<h3>License</h3>\n<p>The MIT License (MIT)</p>\n<p>Copyright (c) 2015 Max Rittm&#xFC;ller</p>\n<p>Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the &quot;Software&quot;), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:</p>\n<p>The above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.</p>\n<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</p>\n"
+    },
+    {
+      "component": "footer",
+      "links": [
+        {
+          "href": "https://github.com/maxrimue/node-autostart",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://github.com/maxrimue",
+          "text": "maxrimue"
+        }
+      ]
+    }
+  ]
+}
