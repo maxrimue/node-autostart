@@ -1,3 +1,6 @@
+## Due to tight resources and serious issues with this project, I'm deprecating it. I highly recommend [auto-launch](https://www.npmjs.com/package/auto-launch), it has a similar API and should be easy to switch over to. Sorry for the circumstances.
+
+
 # node-autostart   
 [![Build Status](https://travis-ci.org/maxrimue/node-autostart.svg)](https://travis-ci.org/maxrimue/node-autostart)
 [![Build status](https://ci.appveyor.com/api/projects/status/rm9qiglp1lafov9u?svg=true)](https://ci.appveyor.com/project/maxrimue/node-autostart)
